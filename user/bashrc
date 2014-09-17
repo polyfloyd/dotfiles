@@ -1,0 +1,71 @@
+source $HOME/.profile
+[ -r $HOME/.bashrc.local ] && source $HOME/.bashrc.local
+
+# If not running interactively, don't do anything!
+[[ $- != *i* ]] && return
+
+# Bash won't get SIGWINCH if another process is in the foreground.
+# Enable checkwinsize so that bash will check the terminal size when
+# it regains control.
+# http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
+shopt -s checkwinsize
+
+# Enable history appending instead of overwriting.
+shopt -s histappend
+
+case ${TERM} in
+	xterm*|rxvt*|Eterm|aterm|kterm|gnome*)
+		PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+		;;
+	screen)
+		PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033_%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+		;;
+esac
+
+# Set colorful PS1 only on colorful terminals.
+# dircolors --print-database uses its own built-in database
+# instead of using /etc/DIR_COLORS. Try to use the external file
+# first to take advantage of user additions. Use internal bash
+# globbing instead of external grep binary.
+
+# sanitize TERM:
+safe_term=${TERM//[^[:alnum:]]/?}
+match_lhs=""
+
+[[ -f ~/.dircolors ]] && match_lhs="${match_lhs}$(<~/.dircolors)"
+[[ -z ${match_lhs} ]] \
+	&& type -P dircolors >/dev/null \
+	&& match_lhs=$(dircolors --print-database)
+
+if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] ; then
+	# we have colors :-)
+	eval $(dircolors -b ~/.dircolors)
+
+	PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi)\[\033[01;34m\] \w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] "
+
+	alias ls="ls --color=auto"
+	alias dir="dir --color=auto"
+	alias grep="grep --color=auto"
+	alias dmesg='dmesg --color'
+
+else
+	PS1="\u@\h \w \$([[ \$? != 0 ]] && echo \":( \")\$ "
+fi
+
+PS2="> "
+PS3="> "
+PS4="+ "
+
+unset safe_term match_lhs
+
+[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+
+alias cd="pushd > /dev/null"
+alias bd="popd > /dev/null"
+alias l="ls -hlF"
+alias la="ls -hlFA"
+alias apt-autopurge="dpkg -l | grep '^rc' | awk '{print $2}' | xargs dpkg --purge"
+alias apt-update="apt-get clean && apt-get update && apt-get upgrade -y && apt-get dist-upgrade && apt-get autoremove"
+alias servehttp="python -m SimpleHTTPServer 2000"
+alias vim="gvim"
+alias vi="vim"
