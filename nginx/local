@@ -1,0 +1,23 @@
+server {
+	listen [::1]:80 ipv6only=on;
+	listen 127.0.0.1:80;
+	server_name localhost default_server;
+
+	location / {
+		root "/home/USER/Projects";
+		index index.php index.html index.htm;
+		autoindex on;
+	}
+
+	location /mysql/ {
+		index index.php;
+		root /opt/phpmyadmin/;
+	}
+
+	location /sync/ {
+		proxy_pass http://localhost:8080/;
+		include proxy_params;
+	}
+
+	include php-fpm.conf;
+}
