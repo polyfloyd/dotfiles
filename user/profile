@@ -1,0 +1,9 @@
+xmodmap .Xmodmap 2>/dev/null
+
+if [ -d $HOME/.bin ]; then
+	export PATH=$HOME/.bin:$PATH
+fi
+
+if [ -f .profile.local ]; then
+	. .profile.local
+fi
