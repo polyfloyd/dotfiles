@@ -123,6 +123,8 @@ hi Comment     term=bold ctermfg=8 ctermbg=none
 set background=dark
 colorscheme solarized
 set guioptions-=T "Remove toolbar
+set guioptions-=r "Remove toolbar
+set guioptions-=L "Remove toolbar
 " }}}
 " Text Width {{{
 let &colorcolumn="80,".join(range(120,500),",")
