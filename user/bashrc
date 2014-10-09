@@ -69,3 +69,4 @@ alias apt-update="apt-get clean && apt-get update && apt-get upgrade -y && apt-g
 alias servehttp="python -m SimpleHTTPServer 2000"
 alias vim="gvim"
 alias vi="vim"
+alias youtube-mp3="youtube-dl -o '%(title)s.%(ext)s' -x --audio-format mp3"
