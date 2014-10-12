@@ -41,15 +41,14 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] ; then
 	# we have colors :-)
 	eval $(dircolors -b ~/.dircolors)
 
-	PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi)\[\033[01;34m\] \w \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]:(\[\033[01;34m\] \")\\$\[\033[00m\] "
+	PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi) \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]x \")\[\033[01;34m\]\w\[\033[01;33m\]\$(git branch 2>/dev/null | sed -n 's/* \(.\+\)/:\1/p')\[\033[01;31m\]\$(git diff 2>/dev/null | sed -z 's/\(.\+\)/+/g')\[\033[01;34m\] \\$\[\033[00m\] "
 
 	alias ls="ls --color=auto"
 	alias dir="dir --color=auto"
 	alias grep="grep --color=auto"
 	alias dmesg='dmesg --color'
-
 else
-	PS1="\u@\h \w \$([[ \$? != 0 ]] && echo \":( \")\$ "
+	PS1="\u@\h \w \$([[ \$? != 0 ]] && echo \"x \")\$ "
 fi
 
 PS2="> "
@@ -61,7 +60,7 @@ unset safe_term match_lhs
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 alias cd="pushd > /dev/null"
-alias bd="popd > /dev/null"
+alias b="popd > /dev/null"
 alias l="ls -hlF"
 alias la="ls -hlFA"
 alias sudo="sudo --host=127.0.0.1"
