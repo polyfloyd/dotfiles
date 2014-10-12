@@ -103,14 +103,6 @@ map <F8>   :CtrlPClearCache<CR>
 map <F9>   :TlistToggle<CR>
 map <F10>  :NERDTree<CR>
 map <F11>  :NERDTreeClose<CR>
-" nmap <Up>    ggVGd
-" imap <Up>    <Esc>ggVGd
-" nmap <Down>  ggVgd
-" imap <Down>  <Esc>ggVGd
-" nmap <Left>  ggVgd
-" imap <Left>  <Esc>ggVGd
-" nmap <Right> ggVgd
-" imap <Right> <Esc>ggVGd
 " }}
 " Colors / Theming {{{
 hi Normal      ctermfg=252 ctermbg=232
@@ -123,8 +115,8 @@ hi Comment     term=bold ctermfg=8 ctermbg=none
 set background=dark
 colorscheme solarized
 set guioptions-=T "Remove toolbar
-set guioptions-=r "Remove toolbar
-set guioptions-=L "Remove toolbar
+set guioptions-=r
+set guioptions-=L
 " }}}
 " Text Width {{{
 let &colorcolumn="80,".join(range(120,500),",")
