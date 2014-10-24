@@ -1,0 +1,10 @@
+[Unit]
+Description=MPD service for %i
+After=network.target sound.target
+
+[Service]
+User=%i
+ExecStart=/usr/bin/mpd --no-daemon
+
+[Install]
+WantedBy=multi-user.target
