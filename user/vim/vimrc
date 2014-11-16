@@ -123,6 +123,7 @@ let &colorcolumn="80,".join(range(120,500),",")
 "set textwidth=80
 " }}}
 " Autocmds {{{
+autocmd BufRead,BufNewFile *.vp,*.fp,*.gp,*.vs,*.fs,*.gs,*.tcs,*.tes,*.cs,*.vert,*.frag,*.geom,*.tess,*.shd,*.gls,*.glsl set ft=glsl
 autocmd BufRead,BufNewFile *.md              setlocal ft=markdown et ts=2 sw=2
 autocmd BufRead,BufNewFile *.c,*.h,*.cc,*.hh setlocal cin
 autocmd BufRead,BufNewFile *.js,*.css,*.html set expandtab softtabstop=2 shiftwidth=2
