@@ -1,5 +1,5 @@
-" Chris Smeele (CJSx9g) 's .vimrc
-" Last updated @ 2013-08-27-000318
+" PolyFloyd's .vimrc
+" Based upon Chris Smeele's vimrc
 " Netrw stuff that was already there {{{
 version 6.0
 if &cp | set nocp | endif
@@ -85,7 +85,7 @@ let g:airline#extensions#whitespace#checks = [ 'trailing' ]
 let g:Tlist_Exit_OnlyWindow = 1
 let g:Tlist_Use_Right_Window = 1
 let g:tex_flavor='latex'
-let g:DoxygenToolkit_authorName="Chris Smeele"
+let g:DoxygenToolkit_authorName="PolyFloyd"
 " }}}
 " Key mappings {{{
 nmap \|    :tn<CR>
@@ -114,6 +114,7 @@ hi Visual      term=reverse ctermbg=8
 hi Comment     term=bold ctermfg=8 ctermbg=none
 set background=dark
 colorscheme solarized
+set guioptions-=m "Remove menubar
 set guioptions-=T "Remove toolbar
 set guioptions-=r
 set guioptions-=L
