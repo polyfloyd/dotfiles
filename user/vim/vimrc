@@ -96,9 +96,7 @@ imap `tsu  <ESC>:r!date +"\%s"<CR>kgJWa
 map <F1>   :tabnew<CR>
 map <F2>   :tabp<CR>
 map <F3>   :tabn<CR>
-map <F4>   :silent make<CR>:redraw!<CR>
-map <F5>   :silent make test<CR>:redraw!<CR>
-map <F6>   :silent make doc<CR>:redraw!<CR>
+map <F4>   :tabc<CR>
 map <F8>   :CtrlPClearCache<CR>
 map <F9>   :TlistToggle<CR>
 map <F10>  :NERDTree<CR>
