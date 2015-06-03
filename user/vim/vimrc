@@ -31,6 +31,7 @@ set fileencodings=ucs-bom,utf-8,default,latin1
 "set fillchars=vert:│,fold:─
 set fillchars=vert:│,fold:\ 
 set foldmethod=marker
+set nofoldenable
 set grepprg=grep\ -nH\ $*
 set guifont=Terminus\ 12
 set hidden
@@ -61,14 +62,14 @@ set smartindent
 set smarttab
 set splitright
 set nostartofline
-set suffixes=.bak,~,.o,.h,.info,.swp,.obj,.info,.aux,.log,.dvi,.bbl,.out,.o,.lo
+set suffixes=.bak,~,.o,.h,.info,.swp,.obj,.aux,.log,.dvi,.bbl,.out,.o,.lo,.d,.class,.pyc
+set wildignore+=*/*.bak,*/*~,*/*.o,*/*.sw*,*/*.sw*.obj,*/*.aux,*/*.dvi,*/*.bbl,*/*.out,*/*.o,*/*.lo,*/*.d,*/*.class,*/*.pyc
 set switchbuf=useopen
 "set t_Co=256
 set tabstop=4
 set termencoding=utf-8
 set viminfo='20,\"500,%
 set virtualedit=block
-set wildignore+=*/*.o
 set wildmenu
 set window=61
 filetype plugin on
@@ -127,11 +128,13 @@ autocmd BufRead,BufNewFile *.md              setlocal ft=markdown expandtab tabs
 autocmd BufRead,BufNewFile *.c,*.h,*.cc,*.hh setlocal cin
 autocmd BufRead,BufNewFile *.js,*.css,*.html,*.php set noexpandtab softtabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.go set ft=go noexpandtab tabstop=4 shiftwidth=4
+autocmd BufRead,BufNewFile *.ino set ft=cpp noexpandtab tabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.py set ft=python noexpandtab tabstop=4 shiftwidth=4
 autocmd BufNewFile *.pl         exe "normal iperl@\<CR>"
 autocmd BufNewFile *.php        exe "normal iphp@\<Esc>2G"
 autocmd BufNewFile *.html,*.htm exe "normal ihtml@\<Esc>gg/title>\<CR>f<"
 autocmd BufNewFile *.c,*.cc     exe "normal i#include <stdio.h>\<CR>\<CR>int main(int argc, char **argv){\<Esc>0maoreturn 0;\<CR>}\<Esc>`a"
+autocmd BufNewFile .gitignore   exe "normal i~*\<CR>*~\<CR>.*.sw*\<Esc>"
 " }}}
 " Abbrevations {{{
 " Letters {{{
