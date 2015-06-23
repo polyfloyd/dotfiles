@@ -8,7 +8,7 @@
 " Work out what the comment character is, by filetype...
 autocmd FileType             *sh,awk,python,perl,perl6,ruby    let b:cmt = exists('b:cmt') ? b:cmt : '#'
 autocmd FileType             c,cpp,java,go,javascript,php,css  let b:cmt = exists('b:cmt') ? b:cmt : '//'
-autocmd FileType             glsl,html                         let b:cmt = exists('b:cmt') ? b:cmt : '//'
+autocmd FileType             glsl,html,openscad                let b:cmt = exists('b:cmt') ? b:cmt : '//'
 autocmd FileType             haskell,sql                       let b:cmt = exists('b:cmt') ? b:cmt : '--'
 autocmd FileType             vim                               let b:cmt = exists('b:cmt') ? b:cmt : '"'
 autocmd BufNewFile,BufRead   *.vim,.vimrc                      let b:cmt = exists('b:cmt') ? b:cmt : '"'
