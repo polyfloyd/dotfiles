@@ -1,4 +1,0 @@
-Vimrc
-=====
-
-My Vim config.

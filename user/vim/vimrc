@@ -1,7 +1,6 @@
 " PolyFloyd's .vimrc
-" Based upon Chris Smeele's vimrc
-" Netrw stuff that was already there {{{
-version 6.0
+
+version 7.0
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
@@ -22,18 +21,16 @@ nmap <silent> <Plug>IMAP_JumpForward i=IMAP_Jumpfunc('', 0)
 imap <NL> <Plug>IMAP_JumpForward
 let &cpo=s:cpo_save
 unlet s:cpo_save
-" }}}
-" VIM Settings {{{
+
+" VIM Settings
 set autoindent
 set backspace=2
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,default,latin1
-"set fillchars=vert:│,fold:─
 set fillchars=vert:│,fold:\ 
 set foldmethod=marker
 set nofoldenable
 set grepprg=grep\ -nH\ $*
-set guifont=Terminus\ 12
 set hidden
 set history=50
 set hlsearch
@@ -41,18 +38,13 @@ set incsearch
 set laststatus=2
 set linebreak
 set list
-"set listchars=tab:\ ‥,trail:⋯,precedes:←,extends:→
-"set listchars=tab:⋅\ ,trail:⋯,precedes:←,extends:→
 set listchars=tab:│\ ,trail:⋯,precedes:←,extends:→
-"set listchars=tab:█▒,trail:⋯,precedes:←,extends:→
-"set listchars=tab:░\ ,trail:⋯,precedes:←,extends:→
 set nomodeline
 set mouse=a
 set mousemodel=extend
 set nrformats=hex
 set number
 set path+=src,src/include,include
-"set relativenumber
 set ruler
 set shiftwidth=4
 set shortmess=filmnrxtToOI
@@ -65,7 +57,6 @@ set nostartofline
 set suffixes=.bak,~,.o,.h,.info,.swp,.obj,.aux,.log,.dvi,.bbl,.out,.o,.lo,.d,.class,.pyc
 set wildignore+=*/*.bak,*/*~,*/*.o,*/*.sw*,*/*.sw*.obj,*/*.aux,*/*.dvi,*/*.bbl,*/*.out,*/*.o,*/*.lo,*/*.d,*/*.class,*/*.pyc
 set switchbuf=useopen
-"set t_Co=256
 set tabstop=4
 set termencoding=utf-8
 set viminfo='20,\"500,%
@@ -74,21 +65,8 @@ set wildmenu
 set window=61
 filetype plugin on
 syntax on
-" }}}
-" Plugin settings {{{
-let g:NERDTreeDirArrows=0
-let g:NERDTreeMinimalUI=1
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_powerline_fonts=0
-let g:airline_theme='pl_x9g'
-let g:airline#extensions#whitespace#checks = [ 'trailing' ]
-let g:Tlist_Exit_OnlyWindow = 1
-let g:Tlist_Use_Right_Window = 1
-let g:tex_flavor='latex'
-let g:DoxygenToolkit_authorName="PolyFloyd"
-" }}}
-" Key mappings {{{
+
+" Key mappings
 nmap \|    :tn<CR>
 nmap <C-\> :tp<CR>
 imap `ts   <ESC>:r!date +"\%Y-\%m-\%d \%H:\%M:\%S"<CR>kgJ2Wa
@@ -102,8 +80,8 @@ map <F8>   :CtrlPClearCache<CR>
 map <F9>   :TlistToggle<CR>
 map <F10>  :NERDTree<CR>
 map <F11>  :NERDTreeClose<CR>
-" }}
-" Colors / Theming {{{
+
+" Colors / Theming
 hi Normal      ctermfg=252 ctermbg=232
 hi LineNr      ctermbg=0 ctermfg=12
 hi NonText     ctermbg=0 ctermfg=12
@@ -111,18 +89,23 @@ hi ColorColumn ctermbg=0
 hi Search      term=reverse ctermbg=8
 hi Visual      term=reverse ctermbg=8
 hi Comment     term=bold ctermfg=8 ctermbg=none
-set background=dark
 colorscheme solarized
-set guioptions-=m "Remove menubar
-set guioptions-=T "Remove toolbar
-set guioptions-=r
-set guioptions-=L
-" }}}
-" Text Width {{{
-let &colorcolumn="80,".join(range(120,500),",")
-"set textwidth=80
-" }}}
-" Autocmds {{{
+set background=dark
+set guifont=Terminus\ 12
+set guioptions-=m " Remove menubar
+set guioptions-=T " Remove toolbar
+set guioptions-=L " Remove left scrollbar
+set guioptions-=r " Remove right scrollbar
+let &colorcolumn="80"
+let g:NERDTreeDirArrows=1
+let g:NERDTreeMinimalUI=1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_powerline_fonts=0
+let g:airline_theme='solarized'
+let g:airline#extensions#whitespace#checks = [ 'trailing' ]
+
+" Autocmds
 autocmd BufRead,BufNewFile *.vp,*.fp,*.gp,*.vs,*.fs,*.gs,*.tcs,*.tes,*.cs,*.vert,*.frag,*.geom,*.tess,*.shd,*.gls,*.glsl set ft=glsl
 autocmd BufRead,BufNewFile *.md              setlocal ft=markdown expandtab tabstop=2 shiftwidth=2
 autocmd BufRead,BufNewFile *.c,*.h,*.cc,*.hh setlocal cin
@@ -135,25 +118,19 @@ autocmd BufNewFile *.php        exe "normal iphp@\<Esc>2G"
 autocmd BufNewFile *.html,*.htm exe "normal ihtml@\<Esc>gg/title>\<CR>f<"
 autocmd BufNewFile *.c,*.cc     exe "normal i#include <stdio.h>\<CR>\<CR>int main(int argc, char **argv){\<Esc>0maoreturn 0;\<CR>}\<Esc>`a"
 autocmd BufNewFile .gitignore   exe "normal i~*\<CR>*~\<CR>.*.sw*\<Esc>"
-" }}}
-" Abbrevations {{{
-" Letters {{{
-" }}}
-" Programming {{{
-" Copyright / Licensing {{{
-" }}}
-" Perl {{{
-inoreabbrev perl@  #!/usr/bin/perl<CR><BS><CR>use strict;<CR>
-inoreabbrev vimpl@ # vim: sw=4:ts=4:noet:fdm=marker
-" }}}
-" C / C++ {{{
+
+" Plugin settings
+let g:Tlist_Exit_OnlyWindow = 1
+let g:Tlist_Use_Right_Window = 1
+let g:tex_flavor='latex'
+let g:DoxygenToolkit_authorName="PolyFloyd"
+
+" C / C++
 inoreabbrev vimc@  /* vim: sw=4:ts=4:noet:fdm=marker */
 inoreabbrev diec@ #define die(...) \<CR>do{ \<CR>fprintf(stderr, "[error] %s:%d: ", __FILE__, __LINE__); \<CR>fprintf(stderr, __VA_ARGS__); \<CR>fprintf(stderr, "\n"); \<CR>exit(1); \<CR>}while(0)<CR><CR>#define printd(...) \<CR>do{ \<CR>fprintf(stderr, "[debug] %s:%d: ", __FILE__, __LINE__); \<CR>fprintf(stderr, __VA_ARGS__); \<CR>fprintf(stderr, "\n"); \<CR>}while(0)<CR>
-" }}}
-" Webdev {{{
+
+" Webdev
 inoreabbrev php@  <?php<CR><CR>?>
 inoreabbrev html@ <!DOCTYPE html><CR><html><CR><head><CR><title></title><CR><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><CR><link rel="stylesheet" type="text/css" href="css/style.css" /><CR></head><CR><body><CR></body><CR></html>
-" }}}
-" }}}
-" }}}
+
 " vim: set ft=vim
