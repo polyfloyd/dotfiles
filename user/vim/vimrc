@@ -17,6 +17,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sirtaj/vim-openscad'
 Plugin 'tikhomirov/vim-glsl'
+Plugin 'tpope/vim-surround'
 
 call vundle#end()         " required
 filetype plugin indent on " required
