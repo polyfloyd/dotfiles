@@ -1,6 +1,19 @@
 " PolyFloyd's .vimrc
 
 version 7.0
+
+" Vundle Settings
+set nocompatible " be iMproved, required
+filetype off     " required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
+
+call vundle#end()         " required
+filetype plugin indent on " required
+
+" VIM Settings
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
@@ -22,7 +35,6 @@ imap <NL> <Plug>IMAP_JumpForward
 let &cpo=s:cpo_save
 unlet s:cpo_save
 
-" VIM Settings
 set autoindent
 set backspace=2
 set encoding=utf-8
@@ -63,7 +75,6 @@ set viminfo='20,\"500,%
 set virtualedit=block
 set wildmenu
 set window=61
-filetype plugin on
 syntax on
 
 " Key mappings
