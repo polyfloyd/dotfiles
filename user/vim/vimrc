@@ -10,6 +10,7 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
 Plugin 'bling/vim-airline'
+Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sirtaj/vim-openscad'
 
