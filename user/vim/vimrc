@@ -13,6 +13,7 @@ Plugin 'bling/vim-airline'
 Plugin 'fatih/vim-go'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sirtaj/vim-openscad'
+Plugin 'tikhomirov/vim-glsl'
 
 call vundle#end()         " required
 filetype plugin indent on " required
