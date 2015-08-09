@@ -11,6 +11,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
 Plugin 'bling/vim-airline'
 Plugin 'fatih/vim-go'
+Plugin 'godlygeek/tabular'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sirtaj/vim-openscad'
