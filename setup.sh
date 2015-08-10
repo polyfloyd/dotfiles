@@ -27,3 +27,5 @@ enable_in_home "Xmodmap"   ".Xmodmap"
 
 null_in_home ".adobe"
 null_in_home ".macromedia"
+
+vim +PluginInstall +qall
