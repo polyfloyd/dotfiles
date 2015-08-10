@@ -27,34 +27,12 @@ call vundle#end()         " required
 filetype plugin indent on " required
 
 " VIM Settings
-if &cp | set nocp | endif
-let s:cpo_save=&cpo
-set cpo&vim
-map! <S-Insert> *
-imap <silent> <Plug>IMAP_JumpBack =IMAP_Jumpfunc('b', 0)
-imap <silent> <Plug>IMAP_JumpForward =IMAP_Jumpfunc('', 0)
-vmap <NL> <Plug>IMAP_JumpForward
-nmap <NL> <Plug>IMAP_JumpForward
-map Q gq
-nmap gx <Plug>NetrwBrowseX
-nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetrwBrowseX(expand("<cWORD>"),0)
-vmap <silent> <Plug>IMAP_JumpBack `<i=IMAP_Jumpfunc('b', 0)
-vmap <silent> <Plug>IMAP_JumpForward i=IMAP_Jumpfunc('', 0)
-vmap <silent> <Plug>IMAP_DeleteAndJumpBack "_<Del>i=IMAP_Jumpfunc('b', 0)
-vmap <silent> <Plug>IMAP_DeleteAndJumpForward "_<Del>i=IMAP_Jumpfunc('', 0)
-nmap <silent> <Plug>IMAP_JumpBack i=IMAP_Jumpfunc('b', 0)
-nmap <silent> <Plug>IMAP_JumpForward i=IMAP_Jumpfunc('', 0)
-imap <NL> <Plug>IMAP_JumpForward
-let &cpo=s:cpo_save
-unlet s:cpo_save
-
 set autoindent
 set backspace=2
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,default,latin1
 set fillchars=vert:│,fold:\ 
 set foldmethod=marker
-set nofoldenable
 set grepprg=grep\ -nH\ $*
 set hidden
 set history=50
@@ -64,47 +42,44 @@ set laststatus=2
 set linebreak
 set list
 set listchars=tab:│\ ,trail:⋯,precedes:←,extends:→
-set nomodeline
 set mouse=a
 set mousemodel=extend
-set nrformats=hex
-set path+=src,src/include,include
-set ruler
+set nofoldenable
+set nomodeline
+set nostartofline
+set nrformats=alpha
+set path+=src
 set shiftwidth=4
-set shortmess=filmnrxtToOI
+set shortmess=flmnxoOtTI
 set showcmd
 set showtabline=2
 set smartindent
 set smarttab
 set splitright
-set nostartofline
 set suffixes=.bak,~,.o,.h,.info,.swp,.obj,.aux,.log,.dvi,.bbl,.out,.o,.lo,.d,.class,.pyc
-set wildignore+=*/*.bak,*/*~,*/*.o,*/*.sw*,*/*.sw*.obj,*/*.aux,*/*.dvi,*/*.bbl,*/*.out,*/*.o,*/*.lo,*/*.d,*/*.class,*/*.pyc
 set switchbuf=useopen
 set tabstop=4
 set termencoding=utf-8
 set viminfo='20,\"500,%
 set virtualedit=block
+set wildignore+=*/*.bak,*/*~,*/*.o,*/*.sw*,*/*.sw*.obj,*/*.aux,*/*.dvi,*/*.bbl,*/*.out,*/*.o,*/*.lo,*/*.d,*/*.class,*/*.pyc
 set wildmenu
 set window=61
 syntax on
 
-" Key mappings
-nmap \|    :tn<CR>
-nmap <C-\> :tp<CR>
-imap `ts   <ESC>:r!date +"\%Y-\%m-\%d \%H:\%M:\%S"<CR>kgJ2Wa
-imap `tss  <ESC>:r!date +"\%Y-\%m-\%d-\%H\%M\%S"<CR>kgJWa
-imap `tsu  <ESC>:r!date +"\%s"<CR>kgJWa
-map <F1>   :tabnew<CR>
-map <F2>   :tabp<CR>
-map <F3>   :tabn<CR>
-map <F4>   :tabc<CR>
-map <F8>   :CtrlPClearCache<CR>
-map <F9>   :TlistToggle<CR>
-map <F10>  :NERDTree<CR>
-map <F11>  :NERDTreeClose<CR>
+" Key Mappings
+nmap ; :
+map <C-t>     :tabnew<CR>
+map <C-q>     :tabclose<CR>
+map <C-S-tab> :tabprevious<CR>
+map <C-tab>   :tabnext<CR>
+map <F10>     :NERDTree<CR>
+map <F11>     :NERDTreeClose<CR>
+if has("gui_running")
+	imap <S-Space> <C-n>
+endif
 
-" Colors / Theming
+" Colors & Theming
 hi Normal      ctermfg=252 ctermbg=232
 hi LineNr      ctermbg=0 ctermfg=12
 hi NonText     ctermbg=0 ctermfg=12
@@ -129,31 +104,10 @@ let g:airline_theme='solarized'
 let g:airline#extensions#whitespace#checks = [ 'trailing' ]
 
 " Autocmds
-autocmd BufRead,BufNewFile *.vp,*.fp,*.gp,*.vs,*.fs,*.gs,*.tcs,*.tes,*.cs,*.vert,*.frag,*.geom,*.tess,*.shd,*.gls,*.glsl set ft=glsl
 autocmd BufRead,BufNewFile *.md              setlocal ft=markdown expandtab tabstop=2 shiftwidth=2
 autocmd BufRead,BufNewFile *.c,*.h,*.cc,*.hh setlocal cin
 autocmd BufRead,BufNewFile *.js,*.css,*.html,*.php set noexpandtab softtabstop=4 shiftwidth=4
-autocmd BufRead,BufNewFile *.go set ft=go noexpandtab tabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.ino set ft=cpp noexpandtab tabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.py set ft=python noexpandtab tabstop=4 shiftwidth=4
-autocmd BufNewFile *.pl         exe "normal iperl@\<CR>"
-autocmd BufNewFile *.php        exe "normal iphp@\<Esc>2G"
-autocmd BufNewFile *.html,*.htm exe "normal ihtml@\<Esc>gg/title>\<CR>f<"
-autocmd BufNewFile *.c,*.cc     exe "normal i#include <stdio.h>\<CR>\<CR>int main(int argc, char **argv){\<Esc>0maoreturn 0;\<CR>}\<Esc>`a"
-autocmd BufNewFile .gitignore   exe "normal i~*\<CR>*~\<CR>.*.sw*\<Esc>"
-
-" Plugin settings
-let g:Tlist_Exit_OnlyWindow = 1
-let g:Tlist_Use_Right_Window = 1
-let g:tex_flavor='latex'
-let g:DoxygenToolkit_authorName="PolyFloyd"
-
-" C / C++
-inoreabbrev vimc@  /* vim: sw=4:ts=4:noet:fdm=marker */
-inoreabbrev diec@ #define die(...) \<CR>do{ \<CR>fprintf(stderr, "[error] %s:%d: ", __FILE__, __LINE__); \<CR>fprintf(stderr, __VA_ARGS__); \<CR>fprintf(stderr, "\n"); \<CR>exit(1); \<CR>}while(0)<CR><CR>#define printd(...) \<CR>do{ \<CR>fprintf(stderr, "[debug] %s:%d: ", __FILE__, __LINE__); \<CR>fprintf(stderr, __VA_ARGS__); \<CR>fprintf(stderr, "\n"); \<CR>}while(0)<CR>
-
-" Webdev
-inoreabbrev php@  <?php<CR><CR>?>
-inoreabbrev html@ <!DOCTYPE html><CR><html><CR><head><CR><title></title><CR><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><CR><link rel="stylesheet" type="text/css" href="css/style.css" /><CR></head><CR><body><CR></body><CR></html>
 
 " vim: set ft=vim
