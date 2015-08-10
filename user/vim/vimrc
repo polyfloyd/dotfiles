@@ -65,7 +65,6 @@ set nomodeline
 set mouse=a
 set mousemodel=extend
 set nrformats=hex
-set number
 set path+=src,src/include,include
 set ruler
 set shiftwidth=4
