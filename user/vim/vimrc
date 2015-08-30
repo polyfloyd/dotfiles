@@ -76,7 +76,9 @@ map <C-tab>   :tabnext<CR>
 map <F10>     :NERDTree<CR>
 map <F11>     :NERDTreeClose<CR>
 if has("gui_running")
-	imap <S-Space> <C-n>
+	inoremap <C-Space> <C-n>
+elseif has("unix")
+	inoremap <Nul> <C-n>
 endif
 
 " Colors & Theming
