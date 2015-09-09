@@ -14,6 +14,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'fatih/vim-go'
 Plugin 'godlygeek/tabular'
+Plugin 'hail2u/vim-css3-syntax'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
@@ -111,5 +112,6 @@ autocmd BufRead,BufNewFile *.c,*.h,*.cc,*.hh setlocal cin
 autocmd BufRead,BufNewFile *.js,*.css,*.html,*.php set noexpandtab softtabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.ino set ft=cpp noexpandtab tabstop=4 shiftwidth=4
 autocmd BufRead,BufNewFile *.py set ft=python noexpandtab tabstop=4 shiftwidth=4
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 " vim: set ft=vim
