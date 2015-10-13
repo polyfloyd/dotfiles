@@ -75,8 +75,7 @@ map <C-t>     :tabnew<CR>
 map <C-q>     :tabclose<CR>
 map <C-S-tab> :tabprevious<CR>
 map <C-tab>   :tabnext<CR>
-map <F10>     :NERDTree<CR>
-map <F11>     :NERDTreeClose<CR>
+map <F10>     :NERDTreeToggle<CR>
 if has("gui_running")
 	inoremap <C-Space> <C-x><C-o>
 elseif has("unix")
