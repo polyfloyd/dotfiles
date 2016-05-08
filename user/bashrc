@@ -41,7 +41,7 @@ if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] ; then
 	# we have colors :-)
 	eval $(dircolors -b ~/.dircolors)
 
-	PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi) \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]x \")\[\033[01;34m\]\w\[\033[01;33m\]\$(git branch 2>/dev/null | sed -n 's/* \(.\+\)/:\1/p')\[\033[01;31m\]\$(git diff 2>/dev/null | sed -z 's/\(.\+\)/+/g')\[\033[01;34m\] \\$\[\033[00m\] "
+	PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi) \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]x \")\[\033[01;34m\]\w\[\033[01;33m\]\$(git branch 2>/dev/null | sed -n 's/* \(.\+\)/:\1/p')\[\033[01;31m\]\$(git diff --name-only 2>/dev/null | sed -z 's/\(.\+\)/+/g')\[\033[01;34m\] \\$\[\033[00m\] "
 
 	alias ls="ls --color=auto"
 	alias dir="dir --color=auto"
@@ -71,6 +71,16 @@ alias apt-autopurge="dpkg -l | grep '^rc' | awk '{print $2}' | xargs dpkg --purg
 alias apt-update="apt-get clean && apt-get update && apt-get upgrade -y && apt-get dist-upgrade && apt-get autoremove"
 alias servehttp="python -m SimpleHTTPServer 2000"
 alias mkpasswd="dd if=/dev/urandom count=1 bs=42 status=none | base64"
-which gvim > /dev/null && alias vim="gvim"
+if [[ $DISPLAY && `which gvim` ]]; then
+	alias vim="gvim"
+fi
 alias vi="vim"
 alias youtube-mp3="youtube-dl -o '%(title)s.%(ext)s' -x --audio-format mp3"
+
+md2pdf() {
+	if [ ! $1 ]; then
+		echo "Usage: md2pdf <file>"
+		return
+	fi
+	pandoc -s -f markdown_github -o $1.pdf $1
+}
