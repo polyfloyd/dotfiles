@@ -32,23 +32,26 @@ esac
 safe_term=${TERM//[^[:alnum:]]/?}
 match_lhs=""
 
-[[ -f ~/.dircolors ]] && match_lhs="${match_lhs}$(<~/.dircolors)"
+[[ -f ~/.config/dircolors ]] && match_lhs="${match_lhs}$(<~/.config/dircolors)"
 [[ -z ${match_lhs} ]] \
 	&& type -P dircolors >/dev/null \
 	&& match_lhs=$(dircolors --print-database)
 
-if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] ; then
+if [[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]]; then
 	# we have colors :-)
-	eval $(dircolors -b ~/.dircolors)
+	eval $(dircolors ~/.config/dircolors)
+
 
 	PS1="$(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;32m\]\u@\h'; fi) \$([[ \$? != 0 ]] && echo \"\[\033[01;31m\]x \")\[\033[01;34m\]\w\[\033[01;33m\]\$(git branch 2>/dev/null | sed -n 's/* \(.\+\)/:\1/p')\[\033[01;31m\]\$(git diff --name-only 2>/dev/null | sed -z 's/\(.\+\)/+/g')\[\033[01;34m\] \\$\[\033[00m\] "
 
-	alias ls="ls --color=auto"
+	alias ls="ls -h --color=auto"
 	alias dir="dir --color=auto"
 	alias grep="grep --color=auto"
 	alias dmesg='dmesg --color'
 else
 	PS1="\u@\h \w \$([[ \$? != 0 ]] && echo \"x \")\$ "
+
+	alias ls="ls -h"
 fi
 
 PS2="> "
@@ -62,8 +65,8 @@ unset safe_term match_lhs
 alias cd="pushd > /dev/null"
 alias b="popd > /dev/null"
 alias ..="cd .."
-alias l="ls -hlF"
-alias la="ls -hlFA"
+alias l="ls -lF"
+alias la="ls -lFA"
 alias sudo="sudo --host=127.0.0.1"
 alias make="make -j `grep ^processor /proc/cpuinfo | wc -l`"
 alias grepr="grep -rIn"
