@@ -17,6 +17,7 @@ enable_in_home "vim"                           ".vim"
 enable_in_home "vimrc"                         ".vimrc"
 
 enable_in_home "profile"                       ".xprofile"
+enable_in_home "config/compton.conf"           ".config/compton.conf"
 enable_in_home "config/terminator/config"      ".config/terminator/config"
 enable_in_home "mpdconf"                       ".mpdconf"
 enable_in_home "ncmpcpp/config"                ".ncmpcpp/config"
