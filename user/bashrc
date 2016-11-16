@@ -70,15 +70,23 @@ alias la="ls -lFA"
 alias sudo="sudo --host=127.0.0.1"
 alias make="make -j `grep ^processor /proc/cpuinfo | wc -l`"
 alias grepr="grep -rIn"
+alias certinfo="openssl x509 -noout -text -in"
 alias apt-autopurge="dpkg -l | grep '^rc' | awk '{print $2}' | xargs dpkg --purge"
 alias apt-update="apt-get clean && apt-get update && apt-get upgrade -y && apt-get dist-upgrade && apt-get autoremove"
-alias servehttp="python -m SimpleHTTPServer 2000"
 alias mkpasswd="dd if=/dev/urandom count=1 bs=42 status=none | base64"
 if [[ $DISPLAY && `which gvim` ]]; then
 	alias vim="gvim"
 fi
-alias vi="vim"
+alias vi="echo no u"
 alias youtube-mp3="youtube-dl -o '%(title)s.%(ext)s' -x --audio-format mp3"
+
+servehttp() {
+	port="$1"
+	if [[ "$port" == "" ]]; then
+		port=2000
+	fi
+	python -m SimpleHTTPServer "$port"
+}
 
 markdown2pdf() {
 	if [ ! $1 ]; then
