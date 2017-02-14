@@ -80,7 +80,7 @@ alias vim="nvim"
 alias vi="echo no u"
 if [[ $DISPLAY && `which nvim` ]]; then
 	gnvim() {
-		terminator --command="nvim $*" --working-directory="$PWD" --title="neovim" --icon="vim"
+		{ terminator --command="nvim $*" --working-directory="$PWD" --title="neovim" --icon="vim" 2> /dev/null & } 2>/dev/null
 	}
 	alias gvim="gnvim"
 	alias vim="gvim"
