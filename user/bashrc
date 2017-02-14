@@ -74,11 +74,17 @@ alias certinfo="openssl x509 -noout -text -in"
 alias apt-autopurge="dpkg -l | grep '^rc' | awk '{print $2}' | xargs dpkg --purge"
 alias apt-update="apt-get clean && apt-get update && apt-get upgrade -y && apt-get dist-upgrade && apt-get autoremove"
 alias mkpasswd="dd if=/dev/urandom count=1 bs=42 status=none | base64"
-if [[ $DISPLAY && `which gvim` ]]; then
+alias youtube-mp3="youtube-dl -o '%(title)s.%(ext)s' -x --audio-format mp3"
+
+alias vim="nvim"
+alias vi="echo no u"
+if [[ $DISPLAY && `which nvim` ]]; then
+	gnvim() {
+		terminator --command="nvim $*" --working-directory="$PWD" --title="neovim" --icon="vim"
+	}
+	alias gvim="gnvim"
 	alias vim="gvim"
 fi
-alias vi="echo no u"
-alias youtube-mp3="youtube-dl -o '%(title)s.%(ext)s' -x --audio-format mp3"
 
 servehttp() {
 	port="$1"

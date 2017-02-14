@@ -128,7 +128,7 @@ bindsym Mod4+L exec ~/.config/lock.sh
 bindsym Mod4+P exec ~/.config/lock.sh && systemctl suspend
 bindsym Mod4+F exec thunar
 bindsym Print exec xfce4-screenshooter
-bindsym Mod4+V exec terminator --command="gvim"
+bindsym Mod4+V exec terminator --command="nvim" --title="neovim" --icon="vim"
 bindsym XF86Display exec arandr
 bindsym Control+Shift+Escape exec terminator --command="htop"
 
