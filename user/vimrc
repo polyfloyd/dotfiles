@@ -1,6 +1,6 @@
-" PolyFloyd's .vimrc
+" polyfloyd's .vimrc
 
-version 7.0
+version 8.0
 
 " Vundle Settings
 set nocompatible " be iMproved, required
@@ -26,6 +26,7 @@ Plugin 'sirtaj/vim-openscad'
 Plugin 'tikhomirov/vim-glsl'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
+Plugin 'valloric/youcompleteme'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-scripts/nginx.vim'
 
