@@ -15,7 +15,7 @@ set $mod Mod1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec ~/.bin/alacritty
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -129,8 +129,8 @@ bindsym Mod4+P exec ~/.config/lock.sh && systemctl suspend
 bindsym Mod4+F exec thunar
 bindsym Print exec xfce4-screenshooter
 bindsym XF86Display exec arandr
-bindsym Mod4+V exec ~/.bin/alacritty --title="neovim" --command="nvim"
-bindsym Control+Shift+Escape exec ~/.bin/alacritty --command="htop"
+bindsym Mod4+V exec alacritty --title="neovim" --command="nvim"
+bindsym Control+Shift+Escape exec alacritty --command="htop"
 
 bindsym Ctrl+Q [class="(?i)firefox"] nop
 
