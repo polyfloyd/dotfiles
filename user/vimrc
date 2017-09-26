@@ -20,6 +20,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'kien/ctrlp.vim'
+Plugin 'racer-rust/vim-racer'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sirtaj/vim-openscad'
@@ -29,17 +30,19 @@ Plugin 'tpope/vim-surround'
 Plugin 'valloric/youcompleteme'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-scripts/nginx.vim'
+Plugin 'vim-syntastic/syntastic'
 
 call vundle#end()         " required
 filetype plugin indent on " required
 
 " VIM Settings
 set autoindent
-set backspace=2
+set backspace=indent,eol,start
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,default,latin1
 set fillchars=vert:│,fold:\ 
-set foldmethod=marker
+set foldmethod=syntax
+set foldnestmax=1
 set grepprg=grep\ -nH\ $*
 set hidden
 set history=50
@@ -50,22 +53,22 @@ set linebreak
 set list
 set listchars=tab:│\ ,trail:⋯,precedes:←,extends:→
 set mouse=a
-set mousemodel=extend
-set nofoldenable
+set mousemodel=popup_setpos
 set nomodeline
 set nostartofline
 set nrformats=alpha
 set path+=src
-set shiftwidth=4
 set shortmess=flmnxoOtTI
 set showcmd
-set showtabline=2
+set showtabline=1
 set smartindent
 set smarttab
 set splitright
 set suffixes=.bak,~,.o,.h,.info,.swp,.obj,.aux,.log,.dvi,.bbl,.out,.o,.lo,.d,.class,.pyc
 set switchbuf=useopen
 set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set termencoding=utf-8
 set viminfo='20,\"500,%
 set virtualedit=block
@@ -111,12 +114,18 @@ let g:airline_powerline_fonts=0
 let g:airline_theme='solarized'
 let g:airline#extensions#whitespace#checks = [ 'trailing' ]
 
-" Autocmds
-autocmd BufRead,BufNewFile *.md              setlocal ft=markdown expandtab tabstop=2 shiftwidth=2
-autocmd BufRead,BufNewFile *.c,*.h,*.cc,*.hh setlocal cin
-autocmd BufRead,BufNewFile *.js,*.css,*.html,*.php set noexpandtab softtabstop=4 shiftwidth=4
-autocmd BufRead,BufNewFile *.ino set ft=cpp noexpandtab tabstop=4 shiftwidth=4
-autocmd BufRead,BufNewFile *.py set ft=python noexpandtab tabstop=4 shiftwidth=4
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+" Autocmds and other stuff
+autocmd BufRead,BufNewFile *.js,*.css,*.html,*.php set noexpandtab
+autocmd BufRead,BufNewFile,BufWrite *.c,*.h,*.cc,*.hh,*.cpp,*.hpp,*.ino set ft=cpp
+autocmd BufRead,BufNewFile,BufWrite *.md set ft=markdown
+autocmd BufRead,BufNewFile,BufWrite *.py set ft=python
+
+autocmd FileType c,cpp setlocal cin expandtab
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType markdown setlocal expandtab tabstop=2 shiftwidth=2
+autocmd FileType python setlocal foldmethod=indent expandtab
+autocmd FileType gitcommit setlocal nofoldenable
+
+let g:syntastic_rust_checkers = ['cargo']
 
 " vim: set ft=vim
