@@ -30,7 +30,6 @@ Plugin 'tpope/vim-surround'
 Plugin 'valloric/youcompleteme'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-scripts/nginx.vim'
-Plugin 'vim-syntastic/syntastic'
 
 call vundle#end()         " required
 filetype plugin indent on " required
@@ -122,10 +121,9 @@ autocmd BufRead,BufNewFile,BufWrite *.py set ft=python
 
 autocmd FileType c,cpp setlocal cin expandtab
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType markdown setlocal expandtab tabstop=2 shiftwidth=2
+autocmd FileType markdown setlocal expandtab tabstop=2 shiftwidth=2 spelllang=en spell
 autocmd FileType python setlocal foldmethod=indent expandtab
 autocmd FileType gitcommit setlocal nofoldenable
-
-let g:syntastic_rust_checkers = ['cargo']
+autocmd FileType json setlocal nofoldenable
 
 " vim: set ft=vim
