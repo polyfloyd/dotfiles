@@ -70,7 +70,6 @@ alias la="ls -lFA"
 alias sudo="sudo --host=127.0.0.1"
 alias grepr="grep -rIn"
 alias certinfo="openssl x509 -noout -text -in"
-alias apt-autopurge="dpkg -l | grep '^rc' | awk '{print $2}' | xargs dpkg --purge"
 alias mkpasswd="dd if=/dev/urandom count=1 bs=42 status=none | base64"
 alias youtube-mp3="youtube-dl -o '%(title)s.%(ext)s' -x --audio-format mp3"
 
@@ -87,7 +86,7 @@ fi
 servehttp() {
 	port="$1"
 	if [[ "$port" == "" ]]; then
-		port=2000
+		port=3000
 	fi
 	python -m SimpleHTTPServer "$port"
 }
