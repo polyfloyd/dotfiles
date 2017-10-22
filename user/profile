@@ -9,3 +9,5 @@ fi
 if [ -f .profile.local ]; then
 	. .profile.local
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

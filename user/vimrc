@@ -19,7 +19,7 @@ Plugin 'fatih/vim-go'
 Plugin 'godlygeek/tabular'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'jlanzarotta/bufexplorer'
-Plugin 'kien/ctrlp.vim'
+Plugin 'junegunn/fzf'
 Plugin 'racer-rust/vim-racer'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdtree'
@@ -82,6 +82,7 @@ map <C-t>     :tabnew<CR>
 map <C-q>     :tabclose<CR>
 map <C-S-tab> :tabprevious<CR>
 map <C-tab>   :tabnext<CR>
+map <C-p>     :FZF<CR>
 map <F10>     :NERDTreeToggle<CR>
 if has("gui_running")
 	inoremap <C-Space> <C-x><C-o>
