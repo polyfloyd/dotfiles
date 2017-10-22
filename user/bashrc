@@ -77,7 +77,7 @@ alias vim="nvim"
 alias vi="echo no u"
 if [[ $DISPLAY && `which nvim` ]]; then
 	gnvim() {
-		alacritty --working-directory="$PWD" --title="neovim" --command "nvim" "$1" &
+		alacritty --working-directory="$PWD" --title="neovim" --command "nvim" "$@" &
 	}
 	alias gvim="gnvim"
 	alias vim="gvim"
