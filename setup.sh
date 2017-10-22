@@ -25,7 +25,11 @@ enable_in_home "config/alacritty/alacritty.yml" ".config/alacritty/alacritty.yml
 enable_in_home "mpdconf"                        ".mpdconf"
 enable_in_home "ncmpcpp/config"                 ".ncmpcpp/config"
 
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install --key-bindings --completion --no-update-rc
+if [ ! -e ~/.fzf ]; then
+	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+else
+	cd ~/.fzf && git pull
+fi
+~/.fzf/install --key-bindings --no-completion --no-update-rc
 
 vim +PluginInstall +qall
