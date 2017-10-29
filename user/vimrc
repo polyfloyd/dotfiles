@@ -17,6 +17,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'junegunn/fzf'
+Plugin 'metakirby5/codi.vim'
 Plugin 'racer-rust/vim-racer'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sheerun/vim-polyglot'
@@ -112,11 +113,12 @@ let g:airline#extensions#whitespace#checks = [ 'trailing' ]
 autocmd BufRead,BufNewFile *.js,*.css,*.html,*.php set noexpandtab
 autocmd BufRead,BufNewFile,BufWrite *.c,*.h,*.cc,*.hh,*.cpp,*.hpp,*.ino set ft=cpp
 autocmd BufRead,BufNewFile,BufWrite *.md set ft=markdown
+autocmd BufRead,BufNewFile *.md setlocal spelllang=en
 autocmd BufRead,BufNewFile,BufWrite *.py set ft=python
 
 autocmd FileType c,cpp setlocal cin expandtab
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType markdown setlocal expandtab tabstop=2 shiftwidth=2 spelllang=en spell
+autocmd FileType markdown setlocal expandtab tabstop=2 shiftwidth=2 spell
 autocmd FileType python setlocal foldmethod=indent expandtab
 autocmd FileType gitcommit setlocal nofoldenable
 autocmd FileType json setlocal nofoldenable
