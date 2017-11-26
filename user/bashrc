@@ -131,22 +131,22 @@ video2audio() {
 
 video2x265() {
 	base=`echo "$1" | sed 's/\.\w\+$//'`
-	ffmpeg -i "$1" -c:v libx265 -pix_fmt yuv420p -x265-params crf=28:keyint=240:min-keyint=20 -preset slow "$1.recode.mkv" || exit
+	ffmpeg -i "$1" -c:v libx265 -pix_fmt yuv420p -x265-params crf=28:keyint=240:min-keyint=20 -preset slow "$1.recode.mkv" || return
 	mv "$1" "$1.bak.mp4"
 	mv "$1.recode.mkv" "$base.mkv"
 }
 
 image_optimize_jpg() {
 	base=`echo "$1" | sed 's/\.\w\+$//'`
-	convert -strip -interlace Plane -sampling-factor 4:2:0 -define jpeg:dct-method=float -quality 85% "$1" "$1.recode.jpg" || exit
+	convert -strip -interlace Plane -sampling-factor 4:2:0 -define jpeg:dct-method=float -quality 85% "$1" "$1.recode.jpg" || return
 	mv "$1" "$1.bak.jpg"
 	mv "$1.recode.jpg" "$base.jpg"
 }
 
 video_reencode() {
 	base=`echo "$1" | sed 's/\.\w\+$//'`
-#	ffmpeg -i "$1" -c:v libx264 -preset slow -crf 28 "$1.recode.mp4" || exit
-	ffmpeg -i "$1" -c:v libx265 -pix_fmt yuv420p -x265-params crf=28:keyint=240:min-keyint=20 -preset slow "$1.recode.mp4" || exit
+#	ffmpeg -i "$1" -c:v libx264 -preset slow -crf 28 "$1.recode.mp4" || return
+	ffmpeg -i "$1" -c:v libx265 -pix_fmt yuv420p -x265-params crf=28:keyint=240:min-keyint=20 -preset slow "$1.recode.mp4" || return
 	mv "$1" "$1.bak.mp4"
 	mv "$1.recode.mp4" "$base.mp4"
 }
