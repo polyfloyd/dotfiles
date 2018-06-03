@@ -15,7 +15,7 @@ set $mod Mod1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -135,8 +135,7 @@ bindsym XF86AudioMute exec pactl -- set-sink-mute 0 toggle
 bindsym XF86AudioMicMute exec pactl -- set-source-mute 0 toggle
 bindsym XF86MonBrightnessDown exec ~/.config/brightness down
 bindsym XF86MonBrightnessUp exec ~/.config/brightness up
-bindsym Mod4+V exec alacritty --title="neovim" --command="nvim"
-bindsym Control+Shift+Escape exec alacritty --command="htop"
+bindsym Control+Shift+Escape exec gnome-terminal -- htop
 
 bindsym Ctrl+Q [class="(?i)firefox"] nop
 

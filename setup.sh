@@ -21,7 +21,6 @@ enable_in_home "profile"                        ".xprofile"
 enable_in_home "config/i3/config"               ".config/i3/config"
 enable_in_home "config/brightness"              ".config/brightness"
 enable_in_home "config/compton.conf"            ".config/compton.conf"
-enable_in_home "config/alacritty/alacritty.yml" ".config/alacritty/alacritty.yml"
 enable_in_home "mpdconf"                        ".mpdconf"
 enable_in_home "ncmpcpp/config"                 ".ncmpcpp/config"
 
