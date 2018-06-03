@@ -129,6 +129,12 @@ bindsym Mod4+P exec ~/.config/lock.sh && systemctl suspend
 bindsym Mod4+F exec thunar
 bindsym Print exec xfce4-screenshooter
 bindsym XF86Display exec arandr
+bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec pactl -- set-sink-volume 0 -5%
+bindsym XF86AudioMute exec pactl -- set-sink-mute 0 toggle
+bindsym XF86AudioMicMute exec pactl -- set-source-mute 0 toggle
+bindsym XF86MonBrightnessDown exec ~/.config/brightness down
+bindsym XF86MonBrightnessUp exec ~/.config/brightness up
 bindsym Mod4+V exec alacritty --title="neovim" --command="nvim"
 bindsym Control+Shift+Escape exec alacritty --command="htop"
 
@@ -142,11 +148,9 @@ assign [class="(?i)Telegram"] 4
 assign [class="(?i)clementine"] 5
 
 exec --no-startup-id compton
-exec --no-startup-id xautolock -time 10 -locker ~/.config/lock.sh
 exec --no-startup-id tint2
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift
-exec --no-startup-id xfce4-volumed
 exec --no-startup-id nitrogen --restore
 
 exec --no-startup-id bash ~/.config/startup.sh

@@ -19,6 +19,7 @@ enable_in_home "vimrc"                          ".vimrc"
 
 enable_in_home "profile"                        ".xprofile"
 enable_in_home "config/i3/config"               ".config/i3/config"
+enable_in_home "config/brightness"              ".config/brightness"
 enable_in_home "config/compton.conf"            ".config/compton.conf"
 enable_in_home "config/terminator/config"       ".config/terminator/config"
 enable_in_home "config/alacritty/alacritty.yml" ".config/alacritty/alacritty.yml"
