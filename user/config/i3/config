@@ -127,6 +127,7 @@ bindsym Mod4+X exec "i3-nagbar -t warning -m 'Do you really want to exit your se
 bindsym Mod4+L exec ~/.config/lock.sh
 bindsym Mod4+P exec ~/.config/lock.sh && systemctl suspend
 bindsym Mod4+F exec thunar
+bindsym Mod4+V exec gnome-terminal -- nvim
 bindsym Print exec xfce4-screenshooter
 bindsym XF86Display exec arandr
 bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume 0 +5%
