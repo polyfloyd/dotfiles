@@ -9,6 +9,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
+Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plugin 'airblade/vim-gitgutter'
 Plugin 'autozimu/LanguageClient-neovim', { 'branch': 'next' } " Run install.sh manually
 Plugin 'bling/vim-airline'
@@ -81,11 +82,6 @@ map <C-S-tab> :tabprevious<CR>
 map <C-tab>   :tabnext<CR>
 map <C-p>     :FZF<CR>
 map <F10>     :NERDTreeToggle<CR>
-if has("gui_running")
-	inoremap <C-Space> <C-x><C-o>
-elseif has("unix")
-	inoremap <Nul> <C-x><C-o>
-endif
 
 " Colors & Theming
 hi Normal      ctermfg=252 ctermbg=232
@@ -117,6 +113,7 @@ let g:airline#extensions#whitespace#checks = [ 'trailing' ]
 let g:polyglot_disabled = ['go']
 let g:go_fmt_options = { 'gofmt': '-s' }
 let g:rustfmt_autosave = 1
+let g:deoplete#enable_at_startup = 1
 
 " Language Server settings
 "   rust: rustup component add rls-preview rust-analysis rust-src
