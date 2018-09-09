@@ -10,7 +10,6 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
 Plugin 'airblade/vim-gitgutter'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'chikamichi/mediawiki.vim'
 Plugin 'fatih/vim-go'
@@ -21,6 +20,7 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/goyo.vim'
 Plugin 'metakirby5/codi.vim'
 Plugin 'racer-rust/vim-racer'
+Plugin 'rakr/vim-one'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'sirtaj/vim-openscad'
@@ -96,8 +96,10 @@ hi ColorColumn ctermbg=0
 hi Search      term=reverse ctermbg=8
 hi Visual      term=reverse ctermbg=8
 hi Comment     term=bold ctermfg=8 ctermbg=none
-colorscheme solarized
+colorscheme one
 set background=dark
+set t_Co=256
+set termguicolors
 set guifont=Terminus\ 12
 set guioptions-=m " Remove menubar
 set guioptions-=T " Remove toolbar
@@ -109,7 +111,7 @@ let g:NERDTreeMinimalUI=1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_powerline_fonts=0
-let g:airline_theme='solarized'
+let g:airline_theme='one'
 let g:airline#extensions#whitespace#checks = [ 'trailing' ]
 
 " Plugin settings
