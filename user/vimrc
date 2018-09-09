@@ -10,6 +10,7 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
 Plugin 'airblade/vim-gitgutter'
+Plugin 'autozimu/LanguageClient-neovim', { 'branch': 'next' } " Run install.sh manually
 Plugin 'bling/vim-airline'
 Plugin 'chikamichi/mediawiki.vim'
 Plugin 'fatih/vim-go'
@@ -19,14 +20,12 @@ Plugin 'jlanzarotta/bufexplorer'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/goyo.vim'
 Plugin 'metakirby5/codi.vim'
-Plugin 'racer-rust/vim-racer'
 Plugin 'rakr/vim-one'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'sirtaj/vim-openscad'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-Plugin 'valloric/youcompleteme'
 Plugin 'vim-airline/vim-airline-themes'
 
 call vundle#end()         " required
@@ -118,6 +117,18 @@ let g:airline#extensions#whitespace#checks = [ 'trailing' ]
 let g:polyglot_disabled = ['go']
 let g:go_fmt_options = { 'gofmt': '-s' }
 let g:rustfmt_autosave = 1
+
+" Language Server settings
+"   rust: rustup component add rls-preview rust-analysis rust-src
+"   go:   go get -u github.com/sourcegraph/go-langserver
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'go': [$GOPATH . '/bin/go-langserver'],
+    \ }
+nnoremap <silent> gt :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_rename()<CR>
+nnoremap <silent> gc :call LanguageClient#textDocument_references()<CR>
 
 " Autocmds and other stuff
 autocmd BufRead,BufNewFile *.js,*.css,*.html,*.php set noexpandtab
