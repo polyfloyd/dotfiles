@@ -116,6 +116,8 @@ let g:airline#extensions#whitespace#checks = [ 'trailing' ]
 
 " Plugin settings
 let g:polyglot_disabled = ['go']
+let g:go_fmt_options = { 'gofmt': '-s' }
+let g:rustfmt_autosave = 1
 
 " Autocmds and other stuff
 autocmd BufRead,BufNewFile *.js,*.css,*.html,*.php set noexpandtab
