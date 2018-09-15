@@ -116,11 +116,13 @@ let g:rustfmt_autosave = 1
 let g:deoplete#enable_at_startup = 1
 
 " Language Server settings
-"   rust: rustup component add rls-preview rust-analysis rust-src
-"   go:   go get -u github.com/sourcegraph/go-langserver
+"   go:     go get -u github.com/sourcegraph/go-langserver
+"   python: pip install python-language-server
+"   rust:   rustup component add rls-preview rust-analysis rust-src
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
     \ 'go': [$GOPATH . '/bin/go-langserver'],
+    \ 'python': ['~/.local/bin/pyls'],
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
     \ }
 nnoremap <silent> gt :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
