@@ -95,11 +95,6 @@ colorscheme one
 set background=dark
 set t_Co=256
 set termguicolors
-set guifont=Terminus\ 12
-set guioptions-=m " Remove menubar
-set guioptions-=T " Remove toolbar
-set guioptions-=L " Remove left scrollbar
-set guioptions-=r " Remove right scrollbar
 let &colorcolumn="80"
 let g:NERDTreeDirArrows=1
 let g:NERDTreeMinimalUI=1
