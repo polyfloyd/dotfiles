@@ -1,2 +1,4 @@
-DotFiles
+dotfiles
 ========
+
+Config or whatever.
