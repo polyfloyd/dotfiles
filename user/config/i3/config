@@ -66,6 +66,9 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
 # focus the parent container
 bindsym $mod+a focus parent
 # focus the child container
@@ -116,13 +119,12 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 font pango:Liberation Sans 10
-for_window [class="."] border pixel 0
+for_window [class="."] border pixel 1
 gaps inner 8
 gaps outer 0
 smart_gaps on
+hide_edge_borders smart
 
-bindsym $mod+Shift+c reload # reload the configuration file
-bindsym $mod+Shift+r restart # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym Mod4+X exec "i3-nagbar -t warning -m 'Do you really want to exit your session?' -b 'Yes' 'i3-msg exit'"
 bindsym Mod4+L exec ~/.config/lock.sh
 bindsym Mod4+P exec ~/.config/lock.sh && systemctl suspend
