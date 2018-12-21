@@ -23,6 +23,8 @@ enable_in_home "config/brightness"              ".config/brightness"
 enable_in_home "mpdconf"                        ".mpdconf"
 enable_in_home "ncmpcpp/config"                 ".ncmpcpp/config"
 
+enable_in_home "bin/lock.sh"                    ".bin/lock.sh"
+
 if [ ! -e ~/.fzf ]; then
 	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 else

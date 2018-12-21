@@ -126,8 +126,8 @@ smart_gaps on
 hide_edge_borders smart
 
 bindsym Mod4+X exec "i3-nagbar -t warning -m 'Do you really want to exit your session?' -b 'Yes' 'i3-msg exit'"
-bindsym Mod4+L exec ~/.config/lock.sh
-bindsym Mod4+P exec ~/.config/lock.sh && systemctl suspend
+bindsym Mod4+L exec ~/.bin/lock.sh
+bindsym Mod4+P exec ~/.bin/lock.sh && systemctl suspend
 bindsym Mod4+F exec thunar
 bindsym Mod4+V exec gnome-terminal -- nvim
 bindsym Print exec xfce4-screenshooter
