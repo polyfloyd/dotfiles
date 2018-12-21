@@ -147,7 +147,6 @@ assign [class="(?i)quassel"] 4
 assign [class="(?i)Telegram"] 4
 assign [class="(?i)clementine"] 5
 
-exec --no-startup-id compton
 exec --no-startup-id tint2
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift
