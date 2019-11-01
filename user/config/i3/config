@@ -132,10 +132,10 @@ bindsym Mod4+F exec thunar
 bindsym Mod4+V exec gnome-terminal -- nvim
 bindsym Print exec xfce4-screenshooter
 bindsym XF86Display exec arandr
-bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume 0 +5%
-bindsym XF86AudioLowerVolume exec pactl -- set-sink-volume 0 -5%
-bindsym XF86AudioMute exec pactl -- set-sink-mute 0 toggle
-bindsym XF86AudioMicMute exec pactl -- set-source-mute 0 toggle
+bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl -- set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl -- set-source-mute @DEFAULT_SINK@ toggle
 bindsym XF86MonBrightnessDown exec ~/.bin/brightness.sh down
 bindsym XF86MonBrightnessUp exec ~/.bin/brightness.sh up
 bindsym Control+Shift+Escape exec gnome-terminal -- htop
