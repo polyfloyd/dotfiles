@@ -138,6 +138,7 @@ bindsym XF86AudioMicMute exec pactl -- set-source-mute @DEFAULT_SINK@ toggle
 bindsym XF86MonBrightnessDown exec ~/.bin/brightness.sh down
 bindsym XF86MonBrightnessUp exec ~/.bin/brightness.sh up
 bindsym Control+Shift+Escape exec gnome-terminal -- htop
+bindsym $mod+Shift+d exec ~/.bin/wal.sh
 
 bindsym Ctrl+Q [class="(?i)firefox"] nop
 
@@ -153,3 +154,15 @@ exec --no-startup-id redshift
 exec --no-startup-id nitrogen --restore
 
 exec --no-startup-id bash ~/.config/startup.sh
+
+# Set colors from Xresources
+set_from_resource $fg i3wm.color7
+set_from_resource $bg i3wm.color0
+set_from_resource $fc i3wm.color8
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $fc     $fg  $bg       $fc
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+client.background       $bg

@@ -12,6 +12,8 @@ enable_in_home() {
 enable_in_home "Xmodmap"                        ".Xmodmap"
 enable_in_home "bashrc"                         ".bashrc"
 enable_in_home "dircolors/dircolors.ansi-dark"  ".config/dircolors"
+enable_in_home "wal.sh"                         ".bin/wal.sh"
+enable_in_home "wal-hook.sh"                    ".local/share/wal-hook.sh"
 enable_in_home "profile"                        ".profile"
 enable_in_home "vim"                            ".vim"
 enable_in_home "vim"                            ".config/nvim"
