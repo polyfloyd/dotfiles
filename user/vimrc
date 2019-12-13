@@ -36,10 +36,12 @@ filetype plugin indent on " required
 set autoindent
 set backspace=indent,eol,start
 set encoding=utf-8
+set expandtab
 set fileencodings=ucs-bom,utf-8,default,latin1
 set fillchars=vert:│,fold:\ 
 set foldmethod=syntax
 set foldnestmax=1
+set foldlevelstart=1
 set grepprg=grep\ -nH\ $*
 set hidden
 set history=50
@@ -107,7 +109,7 @@ let g:airline#extensions#whitespace#checks = [ 'trailing' ]
 " Plugin settings
 let g:polyglot_disabled = ['go']
 let g:go_fmt_options = { 'gofmt': '-s' }
-let g:rustfmt_autosave = 1
+let g:rustfmt_autosave = 0
 let g:deoplete#enable_at_startup = 1
 
 " Language Server settings
@@ -127,17 +129,22 @@ nnoremap <silent> gc :call LanguageClient#textDocument_references()<CR>
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 
 " Autocmds and other stuff
-autocmd BufRead,BufNewFile *.js,*.css,*.html,*.php set noexpandtab
-autocmd BufRead,BufNewFile,BufWrite *.c,*.h,*.cc,*.hh,*.cpp,*.hpp,*.ino set ft=cpp
-autocmd BufRead,BufNewFile,BufWrite *.md set ft=markdown
+autocmd BufRead,BufNewFile,BufWrite *.c,*.h,*.cc,*.hh,*.cpp,*.hpp,*.ino setlocal ft=cpp
+autocmd BufRead,BufNewFile,BufWrite *.md setlocal ft=markdown
 autocmd BufRead,BufNewFile *.md setlocal spelllang=en
-autocmd BufRead,BufNewFile,BufWrite *.py set ft=python
+autocmd BufRead,BufNewFile,BufWrite *.py setlocal ft=python
+autocmd BufRead,BufNewFile,BufWrite *.glsl setlocal ft=glsl
 
 autocmd FileType c,cpp setlocal cin expandtab
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType markdown setlocal expandtab tabstop=2 shiftwidth=2 spell
-autocmd FileType python setlocal foldmethod=indent expandtab
+autocmd FileType python setlocal foldmethod=indent expandtab tabstop=4 softtabstop=4 shiftwidth=4
 autocmd FileType gitcommit setlocal nofoldenable
-autocmd FileType json setlocal nofoldenable
+autocmd FileType json setlocal nofoldenable noexpandtab
+autocmd FileType js,jsx,css,html,php set expandtab
+autocmd FileType go,glsl set noexpandtab
+
+autocmd BufWritePost * GitGutter
+autocmd FileType go nnoremap <silent> gi :GoImports<CR>
 
 " vim: set ft=vim
