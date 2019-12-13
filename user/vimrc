@@ -18,7 +18,6 @@ Plugin 'fatih/vim-go'
 Plugin 'godlygeek/tabular'
 Plugin 'hail2u/vim-css3-syntax'
 Plugin 'jlanzarotta/bufexplorer'
-Plugin 'junegunn/fzf'
 Plugin 'junegunn/goyo.vim'
 Plugin 'metakirby5/codi.vim'
 Plugin 'rakr/vim-one'
@@ -31,6 +30,9 @@ Plugin 'vim-airline/vim-airline-themes'
 
 call vundle#end()         " required
 filetype plugin indent on " required
+
+" Requires Debian fzf package
+set rtp+=/usr/share/doc/fzf/examples
 
 " VIM Settings
 set autoindent
