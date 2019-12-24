@@ -144,7 +144,7 @@ autocmd FileType python setlocal foldmethod=indent expandtab tabstop=4 softtabst
 autocmd FileType gitcommit setlocal nofoldenable
 autocmd FileType json setlocal nofoldenable noexpandtab
 autocmd FileType js,jsx,css,html,php set expandtab
-autocmd FileType go,glsl set noexpandtab
+autocmd FileType go set noexpandtab
 
 autocmd BufWritePost * GitGutter
 autocmd FileType go nnoremap <silent> gi :GoImports<CR>
