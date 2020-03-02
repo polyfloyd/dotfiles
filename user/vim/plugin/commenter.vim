@@ -12,6 +12,7 @@ autocmd FileType             glsl,html,openscad,rust,openscad  let b:cmt = exist
 autocmd FileType             scss,gomod,verilog                let b:cmt = exists('b:cmt') ? b:cmt : '//'
 autocmd FileType             haskell,sql                       let b:cmt = exists('b:cmt') ? b:cmt : '--'
 autocmd FileType             vim                               let b:cmt = exists('b:cmt') ? b:cmt : '"'
+autocmd FileType             dosbatch                          let b:cmt = exists('b:cmt') ? b:cmt : 'rem '
 autocmd BufNewFile,BufRead   *.vim,.vimrc                      let b:cmt = exists('b:cmt') ? b:cmt : '"'
 autocmd BufNewFile,BufRead   *.p[lm],.t                        let b:cmt = exists('b:cmt') ? b:cmt : '#'
 autocmd BufNewFile,BufRead   *                                 let b:cmt = exists('b:cmt') ? b:cmt : '#'

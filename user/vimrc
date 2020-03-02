@@ -109,7 +109,7 @@ let g:airline_theme='one'
 let g:airline#extensions#whitespace#checks = [ 'trailing' ]
 
 " Plugin settings
-let g:polyglot_disabled = ['go']
+let g:polyglot_disabled = ['go', 'vlang']
 let g:go_fmt_options = { 'gofmt': '-s' }
 let g:rustfmt_autosave = 0
 let g:deoplete#enable_at_startup = 1
@@ -136,6 +136,7 @@ autocmd BufRead,BufNewFile,BufWrite *.md setlocal ft=markdown
 autocmd BufRead,BufNewFile *.md setlocal spelllang=en
 autocmd BufRead,BufNewFile,BufWrite *.py setlocal ft=python
 autocmd BufRead,BufNewFile,BufWrite *.glsl setlocal ft=glsl
+autocmd BufRead,BufNewFile,BufWrite *.v setlocal ft=verilog
 
 autocmd FileType c,cpp setlocal cin expandtab
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
