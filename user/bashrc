@@ -87,6 +87,7 @@ alias vi="echo no u"
 if [[ $DISPLAY && `which nvim` ]]; then
 	gnvim() {
 		gnome-terminal --working-directory="$PWD" --title="neovim" --quiet -- nvim $@ &
+		disown
 	}
 	alias gvim="gnvim"
 	alias vim="gvim"
