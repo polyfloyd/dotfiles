@@ -142,6 +142,8 @@ bindsym $mod+Shift+d exec ~/.bin/wal.sh
 
 bindsym Ctrl+Q [class="(?i)firefox"] nop
 
+for_window [title="Picture-in-Picture"] sticky enable
+
 assign [class="(?i)firefox"] 1
 assign [class="(?i)chromium"] 1
 assign [class="(?i)icedove|thunderbird"] 4
