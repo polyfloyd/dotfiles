@@ -22,6 +22,7 @@ enable_in_home "vimrc"                          ".vimrc"
 enable_in_home "profile"                        ".xprofile"
 enable_in_home "config/i3/config"               ".config/i3/config"
 enable_in_home "config/brightness"              ".config/brightness"
+enable_in_home "config/tint2/tint2rc"           ".config/tint2/tint2rc"
 enable_in_home "mpdconf"                        ".mpdconf"
 enable_in_home "ncmpcpp/config"                 ".ncmpcpp/config"
 
