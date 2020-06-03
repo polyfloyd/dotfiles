@@ -73,7 +73,7 @@ set shiftwidth=4
 set termencoding=utf-8
 set viminfo='20,\"500,%
 set virtualedit=block
-set wildignore+=*/*.bak,*/*~,*/*.o,*/*.sw*,*/*.sw*.obj,*/*.aux,*/*.dvi,*/*.bbl,*/*.out,*/*.o,*/*.lo,*/*.d,*/*.class,*/*.pyc
+set wildignore+=*/*.bak,*/*~,*/*.o,*/*.sw*,*/*.sw*.obj,*/*.aux,*/*.dvi,*/*.bbl,*/*.out,*/*.o,*/*.lo,*/*.d,*/*.class,*/*.pyc,*/__pycache__
 set wildmenu
 set window=61
 syntax on
@@ -113,6 +113,7 @@ let g:polyglot_disabled = ['go', 'vlang']
 let g:go_fmt_options = { 'gofmt': '-s' }
 let g:rustfmt_autosave = 0
 let g:deoplete#enable_at_startup = 1
+let NERDTreeRespectWildIgnore=1
 
 " Language Server settings
 "   go:     (gopls, included in vim-go)
