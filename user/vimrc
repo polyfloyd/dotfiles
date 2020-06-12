@@ -152,6 +152,5 @@ autocmd FileType js,jsx,css,html,php set expandtab
 autocmd FileType go set noexpandtab
 
 autocmd BufWritePost * GitGutter
-autocmd FileType go nnoremap <silent> gi :GoImports<CR>
 
 " vim: set ft=vim
