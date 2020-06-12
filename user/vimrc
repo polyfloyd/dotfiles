@@ -116,13 +116,14 @@ let g:deoplete#enable_at_startup = 1
 let NERDTreeRespectWildIgnore=1
 
 " Language Server settings
+"   cpp:    apt install clangd
 "   go:     (gopls, included in vim-go)
-"   python: pip install python-language-server
+"   python: pip install python-language-server[flake8]
 "   rust:   rustup component add rls rust-analysis rust-src
 let g:LanguageClient_serverCommands = {
+    \ 'cpp': ['clangd'],
     \ 'python': ['~/.local/bin/pyls'],
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'cpp': ['clangd'],
     \ }
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
