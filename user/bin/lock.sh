@@ -1,6 +1,6 @@
 #!/bin/bash
 
-size=`xrandr | grep \* | cut -d' ' -f4`
+size=`xrandr | grep connected | grep -o '[0-9]\+x[0-9]\+'`
 in=`cat "$HOME/.config/nitrogen/bg-saved.cfg" | grep -o '^file.\+$' | sed 's/^file=//' | head -n1`
 out="$HOME/.cache/lock-$(echo $in $size | shasum | cut -d' ' -f1).png"
 
