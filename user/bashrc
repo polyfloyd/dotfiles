@@ -82,10 +82,10 @@ alias certinfo="openssl x509 -noout -text -in"
 alias mkpasswd="dd if=/dev/urandom count=1 bs=42 status=none | base64"
 alias youtube-mp3="youtube-dl -o '%(title)s.%(ext)s' -x --audio-format mp3"
 
-if [[ `which nvim` ]]; then
+if [[ `command -v nvim` ]]; then
 	alias vim="nvim"
 fi
-if [[ $DISPLAY && `which nvim` ]]; then
+if [[ $DISPLAY && `command -v nvim` ]]; then
 	gnvim() {
 		gnome-terminal --working-directory="$PWD" --title="neovim" --quiet -- nvim $@ &
 		disown
