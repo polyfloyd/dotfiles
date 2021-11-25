@@ -9,7 +9,7 @@
 autocmd FileType             *sh,awk,python,perl,perl6,ruby    let b:cmt = exists('b:cmt') ? b:cmt : '#'
 autocmd FileType             c,cpp,java,go,javascript,php,css  let b:cmt = exists('b:cmt') ? b:cmt : '//'
 autocmd FileType             glsl,html,openscad,rust,openscad  let b:cmt = exists('b:cmt') ? b:cmt : '//'
-autocmd FileType             scss,gomod,verilog                let b:cmt = exists('b:cmt') ? b:cmt : '//'
+autocmd FileType             scss,gomod,verilog,vue            let b:cmt = exists('b:cmt') ? b:cmt : '//'
 autocmd FileType             haskell,sql                       let b:cmt = exists('b:cmt') ? b:cmt : '--'
 autocmd FileType             vim                               let b:cmt = exists('b:cmt') ? b:cmt : '"'
 autocmd FileType             dosbatch                          let b:cmt = exists('b:cmt') ? b:cmt : 'rem '
