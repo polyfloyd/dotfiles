@@ -145,8 +145,8 @@ autocmd FileType markdown setlocal expandtab tabstop=2 shiftwidth=2 spell
 autocmd FileType python setlocal foldmethod=indent expandtab tabstop=4 softtabstop=4 shiftwidth=4
 autocmd FileType gitcommit setlocal nofoldenable
 autocmd FileType json setlocal nofoldenable noexpandtab
-autocmd FileType js,jsx,css,html,php set expandtab
-autocmd FileType go set noexpandtab
+autocmd FileType js,jsx,css,html,php setlocal expandtab
+autocmd FileType go setlocal noexpandtab
 
 autocmd BufWritePost * GitGutter
 
