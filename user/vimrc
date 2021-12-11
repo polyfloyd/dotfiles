@@ -11,14 +11,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 Plug 'bling/vim-airline'
 Plug 'chikamichi/mediawiki.vim'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'godlygeek/tabular'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim', { 'on':  'Goyo' }
 Plug 'metakirby5/codi.vim'
 Plug 'rakr/vim-one'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
