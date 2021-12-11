@@ -65,6 +65,8 @@ set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set colorcolumn=100
+set textwidth=100
 set termencoding=utf-8
 set viminfo='20,\"500,%
 set virtualedit=block
@@ -94,7 +96,6 @@ colorscheme one
 set background=dark
 set t_Co=256
 set termguicolors
-let &colorcolumn="80"
 let g:NERDTreeDirArrows=1
 let g:NERDTreeMinimalUI=1
 let g:airline_left_sep=''
