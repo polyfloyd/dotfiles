@@ -33,7 +33,6 @@ set rtp+=/usr/share/doc/fzf/examples
 set autoindent
 set backspace=indent,eol,start
 set encoding=utf-8
-set expandtab
 set fileencodings=ucs-bom,utf-8,default,latin1
 set fillchars=vert:│,fold:\ 
 set foldmethod=syntax
@@ -62,6 +61,7 @@ set smarttab
 set splitright
 set suffixes=.bak,~,.o,.h,.info,.swp,.obj,.aux,.log,.dvi,.bbl,.out,.o,.lo,.d,.class,.pyc
 set switchbuf=useopen
+set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -139,13 +139,12 @@ autocmd BufRead,BufNewFile,BufWrite *.glsl setlocal ft=glsl
 autocmd BufRead,BufNewFile,BufWrite *.v setlocal ft=verilog
 autocmd BufRead,BufNewFile,BufWrite *.vue setlocal ft=html " 'vue' format is slow?
 
-autocmd FileType c,cpp setlocal cin expandtab
+autocmd FileType c,cpp setlocal cindent
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType markdown setlocal expandtab tabstop=2 shiftwidth=2 spell
-autocmd FileType python setlocal foldmethod=indent expandtab tabstop=4 softtabstop=4 shiftwidth=4
-autocmd FileType gitcommit setlocal nofoldenable
-autocmd FileType json setlocal nofoldenable noexpandtab
-autocmd FileType js,jsx,css,html,php setlocal expandtab
+autocmd FileType markdown setlocal spell
+autocmd FileType python setlocal foldmethod=indent
+autocmd FileType gitcommit,json setlocal nofoldenable
+autocmd FileType js,jsx,json,css,html,markdown setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
 autocmd FileType go setlocal noexpandtab
 
 autocmd BufWritePost * GitGutter
