@@ -2,37 +2,30 @@
 
 version 8.0
 
-" Must be before Vundle.
 let g:polyglot_disabled = ['go', 'vlang', 'vue']
 
-" Vundle Settings
-set nocompatible " be iMproved, required
-filetype off     " required
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'gmarik/Vundle.vim' " let Vundle manage Vundle, required
-Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plugin 'airblade/vim-gitgutter'
-Plugin 'autozimu/LanguageClient-neovim', { 'branch': 'next' } " Run install.sh manually
-Plugin 'bling/vim-airline'
-Plugin 'chikamichi/mediawiki.vim'
-Plugin 'fatih/vim-go'
-Plugin 'godlygeek/tabular'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'junegunn/goyo.vim'
-Plugin 'metakirby5/codi.vim'
-Plugin 'rakr/vim-one'
-Plugin 'scrooloose/nerdtree'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'sirtaj/vim-openscad'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'airblade/vim-gitgutter'
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'bling/vim-airline'
+Plug 'chikamichi/mediawiki.vim'
+Plug 'fatih/vim-go'
+Plug 'godlygeek/tabular'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'junegunn/goyo.vim'
+Plug 'metakirby5/codi.vim'
+Plug 'rakr/vim-one'
+Plug 'scrooloose/nerdtree'
+Plug 'sheerun/vim-polyglot'
+Plug 'sirtaj/vim-openscad'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline-themes'
 
-call vundle#end()         " required
-filetype plugin indent on " required
+call plug#end()
 
 " Requires Debian fzf package
 set rtp+=/usr/share/doc/fzf/examples
