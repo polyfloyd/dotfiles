@@ -147,7 +147,6 @@ assign [class="(?i)firefox"] 1
 assign [class="(?i)chromium"] 1
 assign [class="(?i)icedove|thunderbird"] 4
 assign [class="(?i)quassel"] 4
-assign [class="(?i)Telegram"] 4
 assign [class="(?i)Signal"] 4
 assign [class="(?i)Discord"] 4
 
