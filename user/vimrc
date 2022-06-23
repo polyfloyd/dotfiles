@@ -142,7 +142,7 @@ autocmd BufRead,BufNewFile,BufWrite *.vue setlocal ft=html " 'vue' format is slo
 
 autocmd FileType c,cpp setlocal cindent
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType markdown setlocal spell
+autocmd FileType markdown,gitcommit setlocal spell
 autocmd FileType python setlocal foldmethod=indent
 autocmd FileType gitcommit,json setlocal nofoldenable
 autocmd FileType javascript,json,css,html,markdown setlocal noexpandtab tabstop=2 softtabstop=2 shiftwidth=2
