@@ -128,6 +128,7 @@ bindsym Mod4+L exec ~/.bin/lock.sh
 bindsym Mod4+P exec ~/.bin/lock.sh && systemctl suspend
 bindsym Mod4+F exec thunar
 bindsym Mod4+V exec gnome-terminal -- nvim
+bindsym Mod4+S exec xfce4-screenshooter
 bindsym Print exec xfce4-screenshooter
 bindsym XF86Display exec arandr
 bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ +5%
