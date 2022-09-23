@@ -116,11 +116,11 @@ let NERDTreeRespectWildIgnore=1
 "   cpp:    apt install clangd
 "   go:     (gopls, included in vim-go)
 "   python: pip install python-language-server[flake8]
-"   rust:   rustup component add rls rust-analysis rust-src
+"   rust:   rustup component add rust-analyzer rust-analysis rust-src
 let g:LanguageClient_serverCommands = {
     \ 'cpp': ['clangd'],
     \ 'python': ['~/.local/bin/pyls'],
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rust-analyzer'],
     \ }
 let g:LanguageClient_settingsPath = expand('~/.vim/settings.json')
 set completefunc=LanguageClient#complete
