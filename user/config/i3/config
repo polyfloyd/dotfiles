@@ -125,7 +125,7 @@ hide_edge_borders smart
 
 bindsym Mod4+X exec "i3-nagbar -t warning -m 'Do you really want to exit your session?' -b 'Yes' 'i3-msg exit'"
 bindsym Mod4+L exec ~/.bin/lock.sh
-bindsym Mod4+P exec ~/.bin/lock.sh && systemctl suspend
+bindsym Mod4+P exec systemctl suspend
 bindsym Mod4+F exec thunar
 bindsym Mod4+V exec gnome-terminal -- nvim
 bindsym Mod4+S exec xfce4-screenshooter
@@ -151,6 +151,7 @@ assign [class="(?i)quassel"] 4
 assign [class="(?i)Signal"] 4
 assign [class="(?i)Discord"] 4
 
+exec --no-startup-id xss-lock -- ~/.bin/lock.sh
 exec --no-startup-id picom --vsync --experimental-backends
 exec --no-startup-id tint2
 exec --no-startup-id nm-applet
