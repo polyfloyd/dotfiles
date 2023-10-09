@@ -79,6 +79,7 @@ alias la="ls -lFA"
 alias grepr="grep -rIn"
 alias certinfo="openssl x509 -noout -text -in"
 alias mkpasswd="dd if=/dev/urandom count=1 bs=42 status=none | base64"
+alias youtube-dl="yt-dlp"
 alias youtube-mp3="youtube-dl -o '%(title)s.%(ext)s' -x --audio-format mp3"
 
 if [[ `command -v nvim` ]]; then
