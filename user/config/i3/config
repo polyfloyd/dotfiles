@@ -141,7 +141,6 @@ bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86MonBrightnessDown exec ~/.bin/brightness.sh down
 bindsym XF86MonBrightnessUp exec ~/.bin/brightness.sh up
 bindsym Control+Shift+Escape exec gnome-terminal -- htop
-bindsym $mod+Shift+d exec ~/.bin/wal.sh
 
 bindsym Ctrl+Q [class="(?i)firefox"] nop
 
