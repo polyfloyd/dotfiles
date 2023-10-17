@@ -23,6 +23,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'elkowar/yuck.vim'
 
 call plug#end()
 
