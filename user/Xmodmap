@@ -1,4 +1,5 @@
 remove Lock = Caps_Lock
 keysym Caps_Lock = Escape
 
+# 105 = r-alt, 108 = r-ctrl
 keycode 105 = Multi_key
