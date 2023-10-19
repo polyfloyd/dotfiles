@@ -1,0 +1,17 @@
+(defvar wifi-rev false)
+(defpoll wifi-status :interval "5s" `~/.config/eww/scripts/wifi-status`)
+(defpoll wifi-ssid :interval "5s" `nmcli c | grep wlan0 | awk '{print ($1)}'`)
+
+(defwidget wifi []
+  (eventbox :onhover "${EWW_CMD} update wifi-rev=true"
+            :onhoverlost "${EWW_CMD} update wifi-rev=false"
+            :onclick "nm-connection-editor&"
+    (box :class "line-item wifi" :orientation "horizontal" :halign "end" :space-evenly false
+      {wifi-status == "Connected"    ? " " :
+       wifi-status == "Disconnected" ? " " :
+                                       " " }
+      (revealer :transition "slideright"
+        :reveal wifi-rev
+        :duration "350ms"
+        "${wifi-ssid} ")
+    )))

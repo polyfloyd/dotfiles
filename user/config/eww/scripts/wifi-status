@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ -z "$(nmcli c | grep wlan0)" ]; then
+    echo "Disconnected"
+    exit
+fi
+
+nc -z -w1 polyfloyd.net 443 2>/dev/null
+if [ $? != "0" ]; then
+    echo "Error"
+    exit
+fi
+
+echo "Connected"

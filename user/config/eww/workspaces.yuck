@@ -1,0 +1,15 @@
+(deflisten workspaces :initial "[]" `~/.config/eww/scripts/workspaces`)
+
+(defwidget workspaces []
+  (box :class "workspaces" :hexpand true
+    (for workspace in workspaces
+      (eventbox :onclick "wmctrl -i -a ${workspace.id}" :hexpand true
+        (box :class "workspace ${workspace.focused ? "focused" : ""}" :hexpand true :space-evenly false
+          (label :class "workspace-name" :text "${workspace.name}")
+          (for window in {workspace.windows}
+            (eventbox :onclick "wmctrl -i -a ${window.id}"
+              (image :class "window ${window.focused ? "focused" : ""} ${window.urgent ? "urgent" : ""}"
+                :path {window.icon}
+                :image-height "30"
+                :tooltip {window.name}))
+          ))))))

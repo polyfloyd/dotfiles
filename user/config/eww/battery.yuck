@@ -1,0 +1,28 @@
+(defvar battery-rev false)
+
+(defwidget battery []
+  (eventbox :onhover "${EWW_CMD} update battery-rev=true"
+            :onhoverlost "${EWW_CMD} update battery-rev=false"
+    (box :class "line-item battery" :orientation "horizontal" :halign "end" :space-evenly false
+      "${EWW_BATTERY.BAT1.status == "Discharging"
+        ? (EWW_BATTERY.BAT1.capacity > 98 ? "" :
+           EWW_BATTERY.BAT1.capacity > 90 ? "" :
+           EWW_BATTERY.BAT1.capacity > 80 ? "" :
+           EWW_BATTERY.BAT1.capacity > 70 ? "" :
+           EWW_BATTERY.BAT1.capacity > 60 ? "" :
+           EWW_BATTERY.BAT1.capacity > 50 ? "" :
+           EWW_BATTERY.BAT1.capacity > 40 ? "" :
+           EWW_BATTERY.BAT1.capacity > 30 ? "" :
+           EWW_BATTERY.BAT1.capacity > 20 ? "" :
+                                            "" )
+        : (EWW_BATTERY.BAT1.capacity > 98 ? "" :
+           EWW_BATTERY.BAT1.capacity > 83 ? "" :
+           EWW_BATTERY.BAT1.capacity > 66 ? "" :
+           EWW_BATTERY.BAT1.capacity > 50 ? "" :
+           EWW_BATTERY.BAT1.capacity > 33 ? "" :
+           EWW_BATTERY.BAT1.capacity > 16 ? "" :
+                                            "" )
+      } "
+      (revealer :transition "slideright" :reveal battery-rev :duration "350ms"
+        "${EWW_BATTERY.BAT1.capacity}% ")
+    )))

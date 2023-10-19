@@ -159,6 +159,7 @@ exec_always --no-startup-id nitrogen --restore
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --notifier=~/.bin/dim-screen.sh -- ~/.bin/lock.sh
 exec --no-startup-id tint2
+exec --no-startup-id eww open bar
 
 # Set colors from Xresources
 set_from_resource $fg i3wm.color7

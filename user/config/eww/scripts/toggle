@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -eu
+
+win=$1
+
+if [ -z "$(eww windows | grep "^\*$win$")" ]; then
+    eww open $win
+else
+    eww close $win
+fi

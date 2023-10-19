@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+
+
+import json
+import subprocess
+import xdg.Config
+import xdg.IconTheme
+
+
+xdg.Config.setIconTheme('candy-icons')
+
+
+i3msg_listen_cmd = ['i3-msg', '-m', '-t', 'subscribe', '["workspace", "window"]']
+i3msg_dump_cmd = ['i3-msg', '-t', 'get_tree']
+
+
+def walk_tree(node, in_workspace=False):
+    is_workspace = node['type'] == 'workspace'
+
+    # A workspace can not be in another workspace.
+    if in_workspace:
+        assert not is_workspace
+
+    # Ignore the hidden scratch workspace.
+    if is_workspace and node['name'] == '__i3_scratch':
+        return []
+
+    if is_workspace:
+        windows = []
+        for n in node['nodes'] + node['floating_nodes']:
+            windows += walk_tree(n, True)
+        return [{
+            'type': 'workspace',
+            'name': node['name'],
+            'focused': any(w['focused'] for w in windows),
+            'id': next((w['id'] for w in windows), None),
+            'windows': windows,
+        }]
+    if in_workspace and node['name'] is not None:
+        class_ = 'nvim' if node['name'] == 'neovim' \
+            else node['window_properties']['class'].lower()
+        icon = xdg.IconTheme.getIconPath(class_, 48) or \
+               xdg.IconTheme.getIconPath('applications-office', 48)
+        return [{
+            'type': 'window',
+            'name': node['name'],
+            'id': node['window'],
+            'icon': icon,
+            'focused': node['focused'],
+            'urgent': node['urgent'],
+        }]
+
+    workspaces = []
+    for n in node['nodes']:
+        workspaces += walk_tree(n, in_workspace)
+    return workspaces
+
+
+def i3_dump():
+    k = subprocess.run(i3msg_dump_cmd, capture_output=True)
+    event = json.loads(k.stdout)
+    workspaces = walk_tree(event)
+    print(json.dumps(workspaces), flush=True)
+
+
+i3_dump()
+with subprocess.Popen(i3msg_listen_cmd, stdout=subprocess.PIPE) as proc:
+    while True:
+        proc.stdout.readline()
+        i3_dump()

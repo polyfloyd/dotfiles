@@ -1,0 +1,12 @@
+(defvar sound-rev false)
+(deflisten sound-state :initial "{\"volume\":0,\"expand\":false}" `~/.config/eww/scripts/sound-state`)
+
+(defwidget sound []
+  (eventbox :onhover "${EWW_CMD} update sound-rev=true"
+            :onhoverlost "${EWW_CMD} update sound-rev=false"
+            :onclick "pavucontrol&"
+    (box :class "line-item sound" :orientation "horizontal" :halign "end" :space-evenly false :tooltip "${sound-state.volume}%"
+      {sound-state.volume == 0 ? " " : " "}
+      (revealer :transition "slideright" :reveal {sound-rev || sound-state.expand} :duration "350ms"
+        (scale :value {sound-state.volume} :min 0 :max 100))
+    )))

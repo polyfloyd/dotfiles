@@ -1,0 +1,52 @@
+$color-active: #00ffff;
+$color-alert: #f237ef;
+
+.workspaces {
+    .workspace {
+        border-top: 1px solid rgba(0, 0, 0, 0);
+
+        .workspace-name {
+            padding: 0 4px;
+        }
+
+        &.focused { border-color: rgba($color-active, .5); }
+    }
+
+    .window {
+        padding: 0 4px;
+
+        &.focused { background: rgba($color-active, .2); }
+        &.urgent  { background: rgba($color-alert, .6); }
+    }
+}
+
+.line-item {
+    padding: 0 5px;
+}
+
+.clock {
+    padding: 0 5px;
+    padding-right: 10px;
+    font-size: 14px;
+    font-family: monospace;
+}
+
+.popup {
+    padding: 16px;
+    box-shadow: 0 0 4px 4px #000;
+    background: none;
+    padding: 16px;
+}
+
+.popup-stats {
+    font-size: 28px;
+    margin-bottom: 16px;
+}
+
+scale trough {
+    all: unset;
+    background-color: rgba(#888, 0.2);
+    border-radius: 20px;
+    min-height: 10px;
+    min-width: 100px;
+}

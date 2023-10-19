@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -eu
+
+(echo "Event 'change'"; pactl subscribe) \
+    | grep --line-buffered "Event 'change'" \
+    | while read -r; do
+        # It works, don't judge me...
+        pactl --format json get-sink-volume @DEFAULT_SINK@ \
+            | head -n1 | sed -r 's/ +/ /g' | cut -d' ' -f5 | sed 's/%//'
+    done \
+    | while read vol; do
+        j=`jobs -lpr`
+        if [ ! -z $j ]; then
+            kill $j
+        fi
+        echo '{"volume":'$vol',"expand":true}'
+        (sleep 1; echo '{"volume":'$vol',"expand":false}')&
+    done

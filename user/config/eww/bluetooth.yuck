@@ -1,0 +1,14 @@
+(defvar bluetooth-rev false)
+(defpoll bluetooth-devices :interval "5s" `bluetoothctl devices Connected | sed 's/^\\S\\+ \\S\\+ //'`)
+
+(defwidget bluetooth []
+  (eventbox :onhover "${EWW_CMD} update bluetooth-rev=true"
+            :onhoverlost "${EWW_CMD} update bluetooth-rev=false"
+            :onclick "blueman-manager&"
+    (box :class "line-item bluetooth" :orientation "horizontal" :halign "end" :space-evenly false
+      {bluetooth-devices == "" ? " " : " "}
+      (revealer :transition "slideright"
+        :reveal bluetooth-rev
+        :duration "350ms"
+        "${bluetooth-devices} ")
+    )))

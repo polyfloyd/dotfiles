@@ -1,0 +1,35 @@
+(include "battery.yuck")
+(include "bluetooth.yuck")
+(include "sound.yuck")
+(include "tibber.yuck")
+(include "wifi.yuck")
+(include "workspaces.yuck")
+
+
+(defpoll date :interval "1m" `date +%m-%d`)
+(defpoll clock :interval "1m" `date +%H:%M`)
+(defwidget time []
+  (box :class "line-item clock" :orientation "v"
+    (box "${clock}")
+    (box "${date}")))
+
+
+(defwindow bar
+           :geometry (geometry :x "0%" :y "0px" :width "100%" :height "33px" :anchor "top center")
+           :stacking "fg"
+           :reserve (struts :distance "40px" :side "top")
+           :windowtype "dock"
+           :wm-ignore true
+
+  (box :orientation "horizontal" :space-evenly false
+    (workspaces)
+    (box :halign "end" :space-evenly false
+      (tibber)
+      (sound)
+      (bluetooth)
+      (wifi)
+      (battery)
+      (time)
+    )
+  )
+)

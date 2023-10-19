@@ -1,0 +1,132 @@
+#!/usr/bin/env python3
+
+import requests
+from datetime import datetime
+from time import sleep
+from os.path import expanduser
+from collections import namedtuple
+import math
+import drawsvg as draw
+
+
+Vec = namedtuple('Vec', ['x', 'y'])
+
+
+def render_graph(rates):
+    prices = [rate for (_, rate) in rates]
+    graph_min = min(0.00, *prices)
+    graph_max = max(0.50, *prices)
+
+    img = draw.Drawing(800, 400, origin='bottom-left')
+
+    label_offset = Vec(40 + (6 if graph_min < 0 else 0), 16)
+    label_size = 14
+    y_step = 0.1
+
+    x_interval = (img.width - label_offset.x) / (len(rates) + 1)
+    y_interval = (img.height - label_offset.y) / math.ceil((graph_max - graph_min)/y_step)
+
+    y_offset = -y_interval*abs(math.floor(graph_min/y_step))
+    graph = draw.Group(transform=f'translate({label_offset.x}, {-label_offset.y})', font_family='monospace')
+    img.append(graph)
+
+    graph_height = img.height - label_offset.y
+    graph_width = img.width - label_offset.x
+
+    y_axis = draw.Group()
+    graph.append(y_axis)
+    y_axis.append(draw.Line(0, 0, 0, -img.height+1, stroke_width=1, stroke='#ddd'))
+    for i in range(math.floor(graph_min/y_step), math.ceil(graph_max/y_step)+1):
+        y = -y_interval*(i + abs(math.floor(graph_min/y_step)))
+        y_axis.append(draw.Text('%.02f' % (i*y_step), label_size, -2, y,
+                                fill="#fff", text_anchor='end'))
+        line_style = {'stroke': '#888', 'stroke_dasharray': '5,5'} \
+            if i != 0 else {'stroke': '#ddd'}
+        graph.append(draw.Line(0, y, graph_width, y, stroke_width=1, **line_style))
+
+    x_axis = draw.Group()
+    graph.append(x_axis)
+    datamask = draw.Mask(id='graphdata')
+    x_axis.append(datamask)
+    for (i, (starts_at, rate)) in enumerate(rates):
+        x_axis.append(draw.Text(starts_at.strftime('%H'), label_size, x_interval*(i+1), 13,
+                                fill="#fff", text_anchor='middle'))
+
+        y_scale = math.ceil((graph_max-graph_min)/y_step)*y_step
+        h = (rate/y_scale)*graph_height
+        x = -x_interval/4 + x_interval*(i+1)
+        bar = draw.Group(fill='#fff')
+        datamask.append(bar)
+        bar.append(draw.Rectangle(x+x_interval/12, min(-h, 0)+y_offset, x_interval/3, abs(h)))
+        bar.append(draw.Circle(x+x_interval/4, -h+y_offset, x_interval/6))
+
+
+    data_fill = draw.LinearGradient(0, -graph_height, 0, y_offset)
+    data_fill.add_stop(.2, '#f237efff')
+    data_fill.add_stop(1, '#00ffffff', opacity=0.5)
+    graph.append(draw.Rectangle(0, -graph_height, graph_width, graph_height,
+                                fill=data_fill, mask='url(#graphdata)'))
+
+    return img
+
+
+def get_rates():
+    with open(expanduser("~/.config/tibber-key")) as f:
+        tibber_token = f.read().strip()
+
+    query = """
+    {
+      viewer {
+        homes {
+          currentSubscription{
+            priceInfo{
+              today {
+                total
+                startsAt
+              }
+              tomorrow {
+                total
+                startsAt
+              }
+            }
+          }
+        }
+      }
+    }
+    """
+    r = requests.post('https://api.tibber.com/v1-beta/gql', json={'query': query},
+                      headers={'Authorization': f'Bearer {tibber_token}'})
+    data = r.json()
+
+    homes = data['data']['viewer']['homes']
+    price_info = homes[0]['currentSubscription']['priceInfo']
+
+    all_rates = price_info['today'] + price_info['tomorrow']
+
+    return [(datetime.fromisoformat(rate['startsAt']), rate['total']) for rate in all_rates]
+
+
+while True:
+    rates = get_rates()
+    tz = rates[0][0].tzinfo
+
+    get_now = lambda: datetime.now(tz=tz).replace(minute=0, second=0, microsecond=0)
+    for (starts_at, rate) in rates:
+        if starts_at < get_now():
+            continue
+        while starts_at > get_now():
+            sleep(10)
+
+        # Update the graph whenever a new rate becomes active.
+        now = get_now()
+        img = render_graph([(s, c) for (s, c) in rates if s >= now])
+        img.save_svg('../images/tibber-graph.svg')
+
+        print('%.2f' % rate, flush=True)
+
+        # Terminate the loop to trigger a reload of the rates.
+        # The rates are published every day at 13:00.
+        if starts_at.hour == 12:
+            break
+
+    sleep(60)
