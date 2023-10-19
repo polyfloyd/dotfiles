@@ -14,7 +14,7 @@ enable_in_home "bashrc"                         ".bashrc"
 enable_in_home "dircolors/dircolors.ansi-dark"  ".config/dircolors"
 enable_in_home "profile"                        ".profile"
 enable_in_home "config/eww"                     ".config/eww"
-enable_in_home "vim"                            ".config/nvim"
+enable_in_home "nvim"                           ".config/nvim"
 
 enable_in_home "profile"                        ".xprofile"
 enable_in_home "config/i3/config"               ".config/i3/config"
