@@ -36,7 +36,11 @@ def walk_tree(node, in_workspace=False):
             'id': next((w['id'] for w in windows), None),
             'windows': windows,
         }]
+
     if in_workspace and node['name'] is not None:
+        if node['window_type'] == 'notification':
+            return []
+
         class_ = 'nvim' if node['name'] == 'neovim' \
             else node['window_properties']['class'].lower()
         icon = xdg.IconTheme.getIconPath(class_, 48) or \
