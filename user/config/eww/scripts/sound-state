@@ -9,6 +9,7 @@ set -eu
         pactl --format json get-sink-volume @DEFAULT_SINK@ \
             | head -n1 | sed -r 's/ +/ /g' | cut -d' ' -f5 | sed 's/%//'
     done \
+    | stdbuf -i0 -o0 uniq \
     | while read vol; do
         j=`jobs -lpr`
         if [ ! -z $j ]; then
