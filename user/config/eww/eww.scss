@@ -43,10 +43,22 @@ $color-alert: #f237ef;
     margin-bottom: 16px;
 }
 
-scale trough {
-    all: unset;
-    background-color: rgba(#888, 0.2);
-    border-radius: 20px;
-    min-height: 10px;
-    min-width: 100px;
+scale {
+    trough {
+        all: unset;
+        background-color: rgba(#888, 0.2);
+        border-radius: 20px;
+        min-height: 10px;
+        min-width: 100px;
+    }
+
+    highlight {
+        all: unset;
+        border-radius: 24px;
+        background: rgb(195, 199, 209);
+    }
+
+    slider {
+        all: unset;
+    }
 }
