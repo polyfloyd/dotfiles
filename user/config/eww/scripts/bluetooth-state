@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -eu
+
+while true; do
+    dev=`bluetoothctl devices Connected | cut -d' ' -f3- | head -n1`
+    echo "\"$dev\""
+    sleep 5
+done \
+    | stdbuf -i0 -o0 uniq \
+    | while read dev; do
+        j=`jobs -lpr`
+        if [ ! -z $j ]; then
+            kill $j
+        fi
+        echo '{"device":'$dev',"expand":true}'
+        (sleep 1; echo '{"device":'$dev',"expand":false}')&
+    done
