@@ -2,9 +2,7 @@
 (deflisten tibber-rate :initial "?" `~/.config/eww/scripts/tibber-current-rate`)
 
 (defwidget tibber []
-  (eventbox :onhover "${EWW_CMD} update tibber-rev=true"
-            :onhoverlost "${EWW_CMD} update tibber-rev=false"
-            :onclick "${EWW_CONFIG_DIR}/scripts/toggle tibber"
+  (eventbox :onhover "${EWW_CMD} open tibber" :onhoverlost "${EWW_CMD} close tibber"
     (box :class "line-item tibber" :orientation "horizontal" :halign "end" :space-evenly false
       "${tibber-rate} "
       (revealer :transition "slideright" :reveal tibber-rev :duration "350ms"
@@ -13,8 +11,7 @@
 
 (defwindow tibber
   :geometry (geometry :x "-20px" :y "48px" :anchor "top right")
-  (eventbox :onclick "${EWW_CONFIG_DIR}/scripts/toggle tibber"
-    (box :class "popup" :orientation "v" :space-evenly false
-      (box :class "popup-stats" :halign "start"
-        (label :class "current-rate" :text "${tibber-rate} €/kWh"))
-      (image :path "/home/polyfloyd/.config/eww/images/tibber-graph.svg"))))
+  (box :class "popup" :orientation "v" :space-evenly false
+    (box :class "popup-stats" :halign "start"
+      (label :class "current-rate" :text "${tibber-rate} €/kWh"))
+    (image :path "/home/polyfloyd/.config/eww/images/tibber-graph.svg")))
