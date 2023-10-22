@@ -6,8 +6,8 @@
 (include "workspaces.yuck")
 
 
-(defpoll date :interval "1m" `date +%m-%d`)
-(defpoll clock :interval "1m" `date +%H:%M`)
+(defpoll date :interval "1s" `date +%m-%d`)
+(defpoll clock :interval "1s" `date +%H:%M`)
 (defwidget time []
   (box :class "line-item clock" :orientation "v"
     (box "${clock}")
