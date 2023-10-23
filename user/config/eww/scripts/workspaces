@@ -42,7 +42,7 @@ def walk_tree(node, in_workspace=False):
             return []
 
         class_ = 'nvim' if node['name'] == 'neovim' \
-            else node['window_properties']['class'].lower()
+            else node['window_properties'].get('class', '').lower()
         icon = xdg.IconTheme.getIconPath(class_, 48) or \
                xdg.IconTheme.getIconPath('applications-office', 48)
         return [{
