@@ -1,5 +1,6 @@
 (include "battery.yuck")
 (include "bluetooth.yuck")
+(include "rain.yuck")
 (include "sound.yuck")
 (include "tibber.yuck")
 (include "wifi.yuck")
@@ -25,6 +26,7 @@
     (workspaces)
     (box :halign "end" :space-evenly false
       (tibber)
+      (rain)
       (sound)
       (bluetooth)
       (wifi)

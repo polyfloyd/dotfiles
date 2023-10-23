@@ -1,0 +1,12 @@
+(deflisten rain-state :initial "{\"rain_expected\": false}" `~/.config/eww/scripts/py rain-state`)
+
+(defwidget rain []
+  (eventbox :onhover "${EWW_CMD} open rain" :onhoverlost "${EWW_CMD} close rain" :visible {rain-state.rain_expected}
+    (box :class "line-item rain" :orientation "horizontal" :halign "end" :space-evenly false
+      " "
+    )))
+
+(defwindow rain
+  :geometry (geometry :x "-20px" :y "48px" :anchor "top right")
+  (box :class "popup" :orientation "v" :space-evenly false
+    (image :path {rain-state.graph_img})))

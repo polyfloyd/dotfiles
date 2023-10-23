@@ -1,0 +1,151 @@
+#!/usr/bin/env python3
+
+from collections import namedtuple
+from datetime import datetime, timedelta
+from dbus.mainloop.glib import DBusGMainLoop
+from gi.repository import GLib
+from os import path
+from tempfile import gettempdir
+from time import sleep
+import dbus
+import drawsvg as draw
+import json
+import math
+import requests
+
+
+Vec = namedtuple('Vec', ['x', 'y'])
+
+
+def get_precipitation(coords):
+    # Format 2 digits after the decimal point for a little bit more privacy.
+    r = requests.get('https://cdn-secure.buienalarm.nl/api/3.4/forecast.php?lat=%.2f&lon=%.2f&region=nl&unit=mm/u' % coords)
+    assert r.status_code == 200
+    body = r.json()
+
+    start = datetime.fromtimestamp(body['start'])
+    delta = timedelta(seconds=body['delta'])
+    precipitation = [(start + delta*i, mmh) for (i, mmh) in enumerate(body['precip'])]
+
+    now = datetime.now()
+    return [(start_at, mmh) for (start_at, mmh) in precipitation if start_at >= now]
+
+
+def render_graph(precipitation):
+    graph_min = 0.0
+    graph_max = max(1, *[mmh for (_, mmh) in precipitation])
+
+    img = draw.Drawing(800, 400, origin='bottom-left')
+
+    label_offset = Vec(40 + (6 if graph_min < 0 else 0), 16)
+    label_size = 14
+    y_step = 0.5
+
+    x_interval = (img.width - label_offset.x) / (len(precipitation)-1)
+    y_interval = (img.height - label_offset.y) / math.ceil((graph_max - graph_min)/y_step)
+
+    y_offset = -y_interval*abs(math.floor(graph_min/y_step))
+    graph = draw.Group(transform=f'translate({label_offset.x}, {-label_offset.y})', font_family='monospace')
+    img.append(graph)
+
+    graph_height = img.height - label_offset.y
+    graph_width = img.width - label_offset.x
+
+    y_axis = draw.Group()
+    graph.append(y_axis)
+    y_axis.append(draw.Line(0, 0, 0, -img.height+1, stroke_width=1, stroke='#ddd'))
+    for i in range(math.floor(graph_min/y_step), math.ceil(graph_max/y_step)+1):
+        y = -y_interval*(i + abs(math.floor(graph_min/y_step)))
+        y_axis.append(draw.Text('%.1f' % (i*y_step), label_size, -2, y,
+                                fill="#fff", text_anchor='end'))
+        line_style = {'stroke': '#888', 'stroke_dasharray': '5,5'} \
+            if i != 0 else {'stroke': '#ddd'}
+        graph.append(draw.Line(0, y, graph_width, y, stroke_width=1, **line_style))
+
+    x_axis = draw.Group()
+    graph.append(x_axis)
+    datamask = draw.Mask(id='graphdata')
+    x_axis.append(datamask)
+
+    y_scale = math.ceil((graph_max-graph_min)/y_step)*y_step
+
+    mask_offset = 8
+
+    fill = draw.Path(fill='#888', stroke_width=0, stroke_linecap='round')
+    line = draw.Path(fill='#00000000', stroke='#fff', stroke_width=4, stroke_linecap='round')
+    fill.M(0, 0)
+
+    points = [Vec(x_interval*i, -(mmh/y_scale)*graph_height) for (i, (starts_at, mmh)) in enumerate(precipitation)]
+    segments = zip(points, points[1:])
+
+    for (i, (pa, pb)) in enumerate(segments):
+        starts_at, _ = precipitation[i]
+        if i % 2 == 0:
+            x_axis.append(draw.Text(starts_at.strftime('%H:%M'), label_size, x_interval*(i+1), 13,
+                                    fill="#fff", text_anchor='middle'))
+        if i == 0:
+            fill.L(*pa)
+            line.M(*pa)
+        else:
+            d = x_interval/2
+            fill.C(pa.x+d, pa.y, pb.x-d, pb.y, pb.x, pb.y)
+            line.C(pa.x+d, pa.y, pb.x-d, pb.y, pb.x, pb.y)
+            if i == len(points)-1:
+                fill.L(pb.x, pb.y)
+
+    fill.L(graph_width, 0).L(graph_width, 0).L(0, 0)
+    datamask.append(fill)
+    datamask.append(line)
+
+    data_fill = draw.LinearGradient(0, -graph_height, 0, y_offset)
+    data_fill.add_stop(.2, '#0ff')
+    data_fill.add_stop(1, '#00f')
+    graph.append(draw.Rectangle(0, -graph_height, graph_width, graph_height,
+                                fill=data_fill, mask='url(#graphdata)'))
+
+    return img
+
+
+def location_updated(old_path, new_path):
+    location_obj = bus.get_object(geoclue_bus, new_path)
+    location_properties = dbus.Interface(location_obj, 'org.freedesktop.DBus.Properties')
+    iface = f'{geoclue_bus}.Location'
+    lat = location_properties.Get(iface, 'Latitude')
+    lon = location_properties.Get(iface, 'Longitude')
+    accuracy = location_properties.Get(iface, 'Accuracy')
+    description = location_properties.Get(iface, 'Description')
+
+    precip = get_precipitation((lat, lon))
+
+    img_out = path.join(gettempdir(), 'eww-rain.svg')
+    img = render_graph(precip)
+    img.save_svg(img_out)
+
+    print(json.dumps({
+        'graph_img': img_out,
+        'lat': lat, 'lon': lon,
+        'accuracy': accuracy,
+        'rain_expected': any(mmh > 0 for (_, mmh) in precip),
+    }), flush=True)
+
+
+geoclue_bus = 'org.freedesktop.GeoClue2'
+
+dbus_loop = DBusGMainLoop(set_as_default=True)
+bus = dbus.SystemBus(mainloop=dbus_loop)
+
+obj = bus.get_object(geoclue_bus, '/org/freedesktop/GeoClue2/Manager')
+manager = dbus.Interface(obj, f'{geoclue_bus}.Manager')
+client_path = manager.GetClient()
+client_obj = bus.get_object(geoclue_bus, client_path)
+client = dbus.Interface(client_obj, f'{geoclue_bus}.Client')
+
+client_properties = dbus.Interface(client_obj, 'org.freedesktop.DBus.Properties')
+client_properties.Set(f'{geoclue_bus}.Client', 'DistanceThreshold', dbus.UInt32(1000))
+client_properties.Set(f'{geoclue_bus}.Client', 'DesktopId', 'GeoClue2-Locator-python')
+
+client.connect_to_signal('LocationUpdated', location_updated)
+client.Start()
+
+loop = GLib.MainLoop()
+loop.run()
