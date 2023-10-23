@@ -1,12 +1,9 @@
-(defvar tibber-rev false)
-(deflisten tibber-rate :initial "?" `~/.config/eww/scripts/tibber-current-rate`)
+(deflisten tibber-rate :initial "?" `~/.config/eww/scripts/py tibber-state`)
 
 (defwidget tibber []
   (eventbox :onhover "${EWW_CMD} open tibber" :onhoverlost "${EWW_CMD} close tibber"
     (box :class "line-item tibber" :orientation "horizontal" :halign "end" :space-evenly false
       "${tibber-rate} "
-      (revealer :transition "slideright" :reveal tibber-rev :duration "350ms"
-        "")
     )))
 
 (defwindow tibber

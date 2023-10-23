@@ -5,4 +5,4 @@ set -eu
 
 cd $(dirname $0)
 . ./venv/bin/activate
-python3 ./tibber-current-rate.py
+python3 $1
