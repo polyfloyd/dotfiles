@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
-import requests
-from datetime import datetime
-from time import sleep
-from os.path import expanduser
 from collections import namedtuple
-import math
+from datetime import datetime
+from os.path import expanduser
+from time import sleep
 import drawsvg as draw
+import math
+import requests
 
 
 Vec = namedtuple('Vec', ['x', 'y'])
@@ -126,7 +126,7 @@ while True:
 
         # Terminate the loop to trigger a reload of the rates.
         # The rates are published every day at 13:00.
-        if starts_at.hour == 12:
+        if starts_at.hour == 13 and rates[-1][0].day == datetime.now().day:
             break
 
     sleep(60)
