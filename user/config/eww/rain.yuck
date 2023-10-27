@@ -8,5 +8,8 @@
 
 (defwindow rain
   :geometry (geometry :x "-20px" :y "48px" :anchor "top right")
+  :stacking "fg"
   (box :class "popup" :orientation "v" :space-evenly false
+    (box :class "popup-stats" :halign "start"
+      (label :class "current-rate" :text "  ${rain-state.location}"))
     (image :path {rain-state.graph_img})))

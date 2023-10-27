@@ -3,6 +3,7 @@
 from collections import namedtuple
 from datetime import datetime, timedelta
 from dbus.mainloop.glib import DBusGMainLoop
+from geopy.geocoders import Nominatim
 from gi.repository import GLib
 from os import path
 from tempfile import gettempdir
@@ -115,6 +116,13 @@ def location_updated(old_path, new_path):
     accuracy = location_properties.Get(iface, 'Accuracy')
     description = location_properties.Get(iface, 'Description')
 
+    try:
+        geolocator = Nominatim(user_agent="https://github.com/polyfloyd")
+        r = geolocator.reverse('%.2f, %.2f' % (lat, lon), zoom=13)
+        location = r.address
+    except:
+        location = 'Earth'
+
     precip = get_precipitation((lat, lon))
 
     img_out = path.join(gettempdir(), 'eww-rain.svg')
@@ -123,8 +131,7 @@ def location_updated(old_path, new_path):
 
     print(json.dumps({
         'graph_img': img_out,
-        'lat': lat, 'lon': lon,
-        'accuracy': accuracy,
+        'location': location,
         'rain_expected': any(mmh > 0 for (_, mmh) in precip),
     }), flush=True)
 
