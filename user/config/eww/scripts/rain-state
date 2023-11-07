@@ -107,23 +107,13 @@ def render_graph(precipitation):
     return img
 
 
-def location_updated(old_path, new_path):
-    location_obj = bus.get_object(geoclue_bus, new_path)
-    location_properties = dbus.Interface(location_obj, 'org.freedesktop.DBus.Properties')
-    iface = f'{geoclue_bus}.Location'
-    lat = location_properties.Get(iface, 'Latitude')
-    lon = location_properties.Get(iface, 'Longitude')
-    accuracy = location_properties.Get(iface, 'Accuracy')
-    description = location_properties.Get(iface, 'Description')
 
-    try:
-        geolocator = Nominatim(user_agent="https://github.com/polyfloyd")
-        r = geolocator.reverse('%.2f, %.2f' % (lat, lon), zoom=13)
-        location = r.address
-    except:
-        location = 'Earth'
+location_name = 'Earth'
+location_coords = None
 
-    precip = get_precipitation((lat, lon))
+
+def handle_update():
+    precip = get_precipitation(location_coords)
 
     img_out = path.join(gettempdir(), 'eww-rain.svg')
     img = render_graph(precip)
@@ -131,9 +121,36 @@ def location_updated(old_path, new_path):
 
     print(json.dumps({
         'graph_img': img_out,
-        'location': location,
+        'location': location_name,
         'rain_expected': any(mmh > 0 for (_, mmh) in precip),
     }), flush=True)
+
+
+def periodic_reload():
+    if location_coords:
+        handle_update()
+    return True
+
+
+def location_updated(old_path, new_path):
+    global location_name, location_coords
+
+    location_obj = bus.get_object(geoclue_bus, new_path)
+    location_properties = dbus.Interface(location_obj, 'org.freedesktop.DBus.Properties')
+    iface = f'{geoclue_bus}.Location'
+    lat = location_properties.Get(iface, 'Latitude')
+    lon = location_properties.Get(iface, 'Longitude')
+    location_coords = (lat, lon)
+
+    try:
+        geolocator = Nominatim(user_agent="https://github.com/polyfloyd")
+        r = geolocator.reverse('%.2f, %.2f' % (lat, lon), zoom=13)
+        sa = r.address.split(', ')
+        location_name = '%s, %s' % (sa[0], sa[-1])
+    except:
+        pass
+
+    handle_update()
 
 
 geoclue_bus = 'org.freedesktop.GeoClue2'
@@ -153,6 +170,8 @@ client_properties.Set(f'{geoclue_bus}.Client', 'DesktopId', 'GeoClue2-Locator-py
 
 client.connect_to_signal('LocationUpdated', location_updated)
 client.Start()
+
+GLib.timeout_add_seconds(60 * 30, periodic_reload)
 
 loop = GLib.MainLoop()
 loop.run()
