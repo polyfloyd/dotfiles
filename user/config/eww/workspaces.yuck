@@ -3,7 +3,7 @@
 (defwidget workspaces []
   (box :class "workspaces" :hexpand true
     (for workspace in workspaces
-      (eventbox :onclick "wmctrl -i -a ${workspace.id}" :hexpand true
+      (eventbox :onclick "wmctrl -s ${workspace.wmctl_id}" :hexpand true
         (box :class "workspace ${workspace.focused ? "focused" : ""}" :hexpand true :space-evenly false
           (label :class "workspace-name" :text "${workspace.name}")
           (for window in {workspace.windows}
