@@ -119,10 +119,18 @@ def handle_update():
     img = render_graph(precip)
     img.save_svg(img_out)
 
+    if precip[0][1] > 0:
+        end_at = next(at for (at, mmh) in precip if mmh == 0)
+        label = '<%02d:%02d' % (end_at.hour, end_at.minute)
+    else:
+        start_at = next((at for (at, mmh) in precip if mmh > 0), None)
+        label = '>%02d:%02d' % (start_at.hour, start_at.minute) if start_at is not None else ''
+
     print(json.dumps({
         'graph_img': img_out,
         'location': location_name,
         'rain_expected': any(mmh > 0 for (_, mmh) in precip),
+        'label': label,
     }), flush=True)
 
 

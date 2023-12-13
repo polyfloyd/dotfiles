@@ -3,7 +3,7 @@
 (defwidget rain []
   (eventbox :onhover "${EWW_CMD} open rain" :onhoverlost "${EWW_CMD} close rain" :visible {rain-state.rain_expected}
     (box :class "line-item rain" :orientation "horizontal" :halign "end" :space-evenly false
-      " "
+      " ${rain-state.label}"
     )))
 
 (defwindow rain
