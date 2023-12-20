@@ -120,8 +120,11 @@ def handle_update():
     img.save_svg(img_out)
 
     if precip[0][1] > 0:
-        end_at = next(at for (at, mmh) in precip if mmh == 0)
-        label = '<%02d:%02d' % (end_at.hour, end_at.minute)
+        end_at = next((at for (at, mmh) in precip if mmh == 0), None)
+        if end_at:
+            label = '<%02d:%02d' % (end_at.hour, end_at.minute)
+        else:
+            label = '>'
     else:
         start_at = next((at for (at, mmh) in precip if mmh > 0), None)
         label = '>%02d:%02d' % (start_at.hour, start_at.minute) if start_at is not None else ''
