@@ -7,8 +7,9 @@
     )))
 
 (defwindow rain
-  :geometry (geometry :x "-20px" :y "48px" :anchor "top right")
-  :stacking "fg"
+  :monitor 0
+  :geometry (geometry :x "12px" :y "12px" :anchor "top right")
+  :stacking "overlay"
   (box :class "popup" :orientation "v" :space-evenly false
     (box :class "popup-stats" :halign "start"
       (label :class "current-rate" :text "  ${rain-state.location}"))

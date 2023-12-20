@@ -3,13 +3,13 @@
 (defwidget workspaces []
   (box :class "workspaces" :hexpand true
     (for workspace in workspaces
-      (eventbox :onclick "wmctrl -s ${workspace.wmctl_id}" :hexpand true
+      (eventbox :onclick "swaymsg 'workspace ${workspace.num}'" :hexpand true
         (box :class "workspace ${workspace.focused ? "focused" : ""}" :hexpand true :space-evenly false
           (label :class "workspace-name" :text "${workspace.name}")
           (for window in {workspace.windows}
-            (eventbox :onclick "wmctrl -i -a ${window.id}"
+            (eventbox :onclick "swaymsg '[pid=${window.pid}] focus'"
               (image :class "window ${window.focused ? "focused" : ""} ${window.urgent ? "urgent" : ""}"
                 :path {window.icon}
-                :image-height "30"
+                :image-height "26"
                 :tooltip {window.name}))
           ))))))

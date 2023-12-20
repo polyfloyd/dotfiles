@@ -87,7 +87,7 @@ if [[ `command -v nvim` ]]; then
 fi
 if [[ $DISPLAY && `command -v nvim` ]]; then
 	gnvim() {
-		gnome-terminal --working-directory="$PWD" --title="neovim" --quiet -- nvim $@ &
+		alacritty --working-directory="$PWD" --title="neovim" -e nvim $@ &
 		disown
 	}
 	alias gvim="gnvim"

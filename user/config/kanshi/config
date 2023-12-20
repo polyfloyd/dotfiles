@@ -1,0 +1,10 @@
+profile lid {
+    output eDP-1 enable scale 1.25
+    exec sleep 1 && eww open bar
+}
+
+profile desk {
+    output eDP-1 disable
+    output "Philips Consumer Electronics Company PHL 346B1C 0x000001C8" enable
+    exec sleep 1 && eww open bar
+}
