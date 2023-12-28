@@ -85,6 +85,8 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+focus_follows_mouse always
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -116,7 +118,6 @@ bindsym Mod4+7 exec brightnessctl set 5%-
 bindsym Mod4+8 exec brightnessctl set 5%+
 bindsym Mod4+F exec thunar
 bindsym Mod4+V exec alacritty -e nvim
-bindsym Mod4+S exec flameshot gui
 bindsym Print exec flameshot gui
 bindsym XF86Display exec wdisplays
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
@@ -126,8 +127,8 @@ bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym XF86MonBrightnessUp exec brightnessctl set 5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
 bindsym Control+Shift+Escape exec alacritty -e htop
 
 #
@@ -167,7 +168,9 @@ for_window [class="eww"] opacity 0.8
 exec_always {
     systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
     hash dbus-update-activation-environment 2>/dev/null && \
-         dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+         dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
+
+    systemctl --user start sway-session.target
 
     gsettings set org.gnome.desktop.interface gtk-theme 'Sweet-Dark-v40'
     gsettings set org.gnome.desktop.interface icon-theme 'candy-icons'
@@ -197,18 +200,23 @@ gaps inner 8
 gaps outer 0
 smart_gaps on
 hide_edge_borders smart
+titlebar_border_thickness 0
+titlebar_padding 4 0
 
 # Set colors from Xresources
+set $bg 222222
+set $fg dddddd
+set $fc 8800ff
 #set_from_resource $fg i3wm.color7
 #set_from_resource $bg i3wm.color0
 #set_from_resource $fc i3wm.color8
 # class                 border  backgr. text indicator child_border
-#client.focused          $bg     $fc     $fg  $bg       $fc
-#client.focused_inactive $bg     $bg     $fg  $bg       $bg
-#client.unfocused        $bg     $bg     $fg  $bg       $bg
-#client.urgent           $bg     $bg     $fg  $bg       $bg
-#client.placeholder      $bg     $bg     $fg  $bg       $bg
-#client.background       $bg
+client.focused          $bg     $fc     $fg  $bg       $fc
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+client.background       $bg
 
 
 #
