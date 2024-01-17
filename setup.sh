@@ -1,6 +1,6 @@
 #! /bin/bash
 
-set -eu
+set -eux
 
 DIR=$(readlink -f $(dirname $0))
 
