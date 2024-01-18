@@ -78,10 +78,6 @@ syntax on
 
 " Key Mappings
 nmap ; :
-map <C-t>     :tabnew<CR>
-map <C-q>     :tabclose<CR>
-map <C-S-tab> :tabprevious<CR>
-map <C-tab>   :tabnext<CR>
 map <C-p>     :FZF<CR>
 map <F10>     :NERDTreeToggle<CR>
 
