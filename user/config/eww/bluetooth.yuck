@@ -6,7 +6,7 @@
             :onhoverlost "${EWW_CMD} update bluetooth-rev=false"
             :onclick "blueman-manager&"
     (box :class "line-item bluetooth" :orientation "horizontal" :halign "end" :space-evenly false
-      {bluetooth-state.device == "" ? " " : " "}
+      (ic {bluetooth-state.device == "" ? " " : " "})
       (revealer :transition "slideright"
         :reveal {bluetooth-rev || bluetooth-state.expand}
         :duration "350ms"

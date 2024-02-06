@@ -3,7 +3,8 @@
 (defwidget tibber []
   (eventbox :onhover "${EWW_CMD} open tibber" :onhoverlost "${EWW_CMD} close tibber"
     (box :class "line-item tibber" :orientation "horizontal" :halign "end" :space-evenly false
-      "${tibber-rate} "
+      (ic "")
+      "${tibber-rate} "
     )))
 
 (defwindow tibber

@@ -3,7 +3,7 @@
 (defwidget rain []
   (eventbox :onhover "${EWW_CMD} open rain" :onhoverlost "${EWW_CMD} close rain" :visible {rain-state.rain_expected}
     (box :class "line-item rain" :orientation "horizontal" :halign "end" :space-evenly false
-      " ${rain-state.label}"
+      (ic " ") {rain-state.label}
     )))
 
 (defwindow rain
@@ -12,5 +12,5 @@
   :stacking "overlay"
   (box :class "popup" :orientation "v" :space-evenly false
     (box :class "popup-stats" :halign "start"
-      (label :class "current-rate" :text "  ${rain-state.location}"))
+      (label :class "current-rate" :text " ${rain-state.location}"))
     (image :path {rain-state.graph_img})))
