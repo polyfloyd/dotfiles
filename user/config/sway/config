@@ -178,8 +178,8 @@ set $lock_cmd '~/.bin/lock.sh'
 exec swayidle -w \
     before-sleep 'loginctl lock-session' \
     lock $lock_cmd \
-    timeout 600 $lock_cmd \
-    timeout 660 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
+    timeout 1800 $lock_cmd \
+    timeout 1860 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
 
 
 
