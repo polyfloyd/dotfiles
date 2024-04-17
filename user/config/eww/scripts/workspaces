@@ -4,11 +4,6 @@
 from pathlib import Path
 import json
 import subprocess
-import xdg.Config
-import xdg.IconTheme
-
-
-xdg.Config.setIconTheme('candy-icons')
 
 
 listen_cmd = ['swaymsg', '-m', '-t', 'subscribe', '["workspace", "window"]']
@@ -50,14 +45,12 @@ def walk_tree(node, in_workspace=False):
             icon_app = class_
         else:
             icon_app = node['app_id']
-        icon = xdg.IconTheme.getIconPath(icon_app, 48) or \
-               xdg.IconTheme.getIconPath('applications-office', 48)
         return [{
             'type': 'window',
             'name': node['name'],
             'pid': node['pid'],
             'app_id': icon_app,
-            'icon': icon,
+            'icon': icon_app,
             'focused': node['focused'],
             'urgent': node['urgent'],
         }]

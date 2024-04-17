@@ -9,7 +9,7 @@
           (for window in {workspace.windows}
             (eventbox :onclick "swaymsg '[pid=${window.pid}] focus'"
               (image :class "window ${window.focused ? "focused" : ""} ${window.urgent ? "urgent" : ""}"
-                :path {window.icon}
-                :image-height "26"
+                :icon {window.icon}
+                :icon-size "large-toolbar"
                 :tooltip {window.name}))
           ))))))
