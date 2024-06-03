@@ -111,7 +111,8 @@ while True:
     tz = rates[0][0].tzinfo
 
     get_now = lambda: datetime.now(tz=tz).replace(minute=0, second=0, microsecond=0)
-    for (starts_at, rate) in rates:
+    while rates:
+        (starts_at, rate) = rates.pop(0)
         if starts_at < get_now():
             continue
         while starts_at > get_now():
@@ -125,8 +126,8 @@ while True:
         print('%.2f' % rate, flush=True)
 
         # Terminate the loop to trigger a reload of the rates.
-        # The rates are published every day at 13:00.
-        if starts_at.hour == 13 and rates[-1][0].day == datetime.now().day:
+        # The rates are published every day at 13:00 up to 23:00 of the next day.
+        if len(rates) <= 11:
             break
 
     sleep(60)
