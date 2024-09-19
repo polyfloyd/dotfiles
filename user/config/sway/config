@@ -133,6 +133,11 @@ bindsym Ctrl+Q [app_id="firefox"] nop
 #    sticky enable
 #}
 
+for_window [title="Property Browser — SolveSpace"] {
+    floating enable
+    border none
+}
+
 for_window [app_id="ulauncher"] {
     floating enable
     sticky enable
