@@ -172,7 +172,6 @@ exec_always {
     gsettings set org.gnome.desktop.interface gtk-theme 'Sweet-Dark-v40'
     gsettings set org.gnome.desktop.interface icon-theme 'candy-icons'
 
-    waypaper --restore
     eww reload
 }
 
