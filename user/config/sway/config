@@ -170,7 +170,8 @@ exec_always {
 
     systemctl --user start sway-session.target
 
-    gsettings set org.gnome.desktop.interface gtk-theme 'Sweet-Dark-v40'
+    gsettings set org.gnome.desktop.interface gtk-theme 'Sweet-Dark'
+    gsettings set org.gnome.desktop.wm.preferences theme 'Sweet-Dark'
     gsettings set org.gnome.desktop.interface icon-theme 'candy-icons'
 
     eww reload
