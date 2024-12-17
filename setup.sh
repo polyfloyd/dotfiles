@@ -12,7 +12,7 @@ enable_in_home() {
 enable_in_home "bashrc"                         ".bashrc"
 enable_in_home "dircolors/dircolors.ansi-dark"  ".config/dircolors"
 enable_in_home "profile"                        ".profile"
-enable_in_home "config/alacritty.yml"           ".config/alacritty.yml"
+enable_in_home "config/alacritty.toml"          ".config/alacritty.toml"
 enable_in_home "config/eww"                     ".config/eww"
 enable_in_home "config/kanshi"                  ".config/kanshi"
 enable_in_home "config/sway"                    ".config/sway"
