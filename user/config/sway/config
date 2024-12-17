@@ -102,6 +102,7 @@ bindsym $mod+r mode "resize"
 # Hotkeys
 #
 bindsym Mod4+X exec "swaynag -t warning -m 'Do you really want to exit your session?' -b 'Yes' 'swaymsg exit'"
+bindsym Mod4+D exec ~/.bin/toggle-darkmode.sh
 bindsym Mod4+L exec loginctl lock-session
 bindsym Mod4+P exec systemctl suspend
 bindsym Mod4+7 exec brightnessctl set 10%-

@@ -22,5 +22,6 @@ enable_in_home "mpdconf"                        ".mpdconf"
 enable_in_home "ncmpcpp/config"                 ".ncmpcpp/config"
 
 enable_in_home "bin/lock.sh"                    ".bin/lock.sh"
+enable_in_home "bin/toggle-darkmode.sh"         ".bin/toggle-darkmode.sh"
 
 vim +PluginInstall +qall
