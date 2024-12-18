@@ -136,6 +136,7 @@ autocmd BufRead,BufNewFile,BufWrite *.py setlocal ft=python
 autocmd BufRead,BufNewFile,BufWrite *.glsl setlocal ft=glsl
 autocmd BufRead,BufNewFile,BufWrite *.v setlocal ft=verilog
 autocmd BufRead,BufNewFile,BufWrite *.vue setlocal ft=html " 'vue' format is slow?
+autocmd BufRead,BufNewFile,BufWrite *.nix setlocal ft=nix
 
 autocmd FileType c,cpp setlocal cindent
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -143,6 +144,7 @@ autocmd FileType markdown,gitcommit setlocal spell
 autocmd FileType python setlocal foldmethod=indent
 autocmd FileType gitcommit,json setlocal nofoldenable
 autocmd FileType javascript,json,css,html,markdown setlocal noexpandtab tabstop=2 softtabstop=2 shiftwidth=2
+autocmd FileType nix setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
 autocmd FileType go setlocal noexpandtab tabstop=4 softtabstop=4 shiftwidth=4
 
 autocmd BufWritePost * GitGutter
