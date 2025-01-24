@@ -3,7 +3,6 @@
 version 8.0
 
 let g:polyglot_disabled = ['go', 'vlang', 'vue']
-let g:python3_host_prog = '/usr/bin/python3'
 
 call plug#begin('~/.config/nvim/plugged')
 
