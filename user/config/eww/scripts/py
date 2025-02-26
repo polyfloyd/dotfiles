@@ -2,7 +2,5 @@
 
 set -eu
 
-
 cd $(dirname $0)
-. ./venv/bin/activate
-python3 $1
+nix-shell shell.nix --run "python3 $1"

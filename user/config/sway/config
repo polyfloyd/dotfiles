@@ -164,9 +164,9 @@ for_window [class="eww"] opacity 0.8
 # Autostarting applications
 #
 exec_always {
-    systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+    systemctl --user import-environment DISPLAY WAYLAND_DISPLAY NIXOS_OZONE_WL SWAYSOCK
     hash dbus-update-activation-environment 2>/dev/null && \
-         dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
+         dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY NIXOS_OZONE_WL SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
     systemctl --user start sway-session.target
 
