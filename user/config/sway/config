@@ -102,7 +102,7 @@ bindsym $mod+r mode "resize"
 # Hotkeys
 #
 bindsym Mod4+X exec "swaynag -t warning -m 'Do you really want to exit your session?' -b 'Yes' 'swaymsg exit'"
-bindsym Mod4+D exec ~/.bin/toggle-darkmode.sh
+bindsym Mod4+D exec toggle-darkmode
 bindsym Mod4+L exec loginctl lock-session
 bindsym Mod4+P exec systemctl suspend
 bindsym Mod4+7 exec brightnessctl set 10%-
@@ -180,7 +180,7 @@ exec_always {
 exec eww open bar
 exec dex --autostart --environment sway
 
-set $lock_cmd '~/.bin/lock.sh'
+set $lock_cmd swaylock-waypaper
 exec swayidle -w \
     before-sleep 'loginctl lock-session' \
     lock $lock_cmd \
