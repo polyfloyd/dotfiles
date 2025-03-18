@@ -3,9 +3,6 @@ animation = "EaseOut"
 color = "#666666"
 duration = 200
 
-[env]
-TERM = "xterm-256color"
-
 [font]
 size = 11.0
 
