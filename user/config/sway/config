@@ -129,10 +129,10 @@ bindgesture swipe:right exec swaync-client -cp
 #
 bindsym Ctrl+Q [app_id="firefox"] nop
 
-#for_window [title="Picture-in-Picture"] {
-#    floating enable
-#    sticky enable
-#}
+for_window [title="Picture-in-Picture"] {
+    floating enable
+    sticky enable
+}
 
 for_window [title="Property Browser — SolveSpace"] {
     floating enable
@@ -143,6 +143,7 @@ for_window [app_id="ulauncher"] {
     floating enable
     sticky enable
     border none
+    blur disable
 }
 
 for_window [app_id="flameshot"] border pixel 0, floating enable, fullscreen disable, move absolute position 0 0
@@ -153,12 +154,6 @@ assign [app_id="thunderbird-default"] 4
 assign [app_id="org.kde.quassel"] 4
 assign [app_id="signal"] 4
 assign [app_id="discord"] 4
-
-#set $opacity 0.5
-#for_window [class=".*"] opacity $opacity
-#for_window [app_id=".*"] opacity $opacity
-for_window [class="eww"] opacity 0.8
-
 
 #
 # Autostarting applications
@@ -203,8 +198,13 @@ hide_edge_borders smart
 titlebar_border_thickness 0
 titlebar_padding 4 0
 
-# Set colors from Xresources
-set $bg 222222
+blur enable
+blur_xray disable
+blur_radius 10
+corner_radius 8
+shadows disable
+
+set $bg 000000
 set $fg dddddd
 set $fc 8800ff
 #set_from_resource $fg i3wm.color7
