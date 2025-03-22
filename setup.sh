@@ -11,4 +11,3 @@ enable_in_home() {
 
 enable_in_home "config/eww"                     ".config/eww"
 enable_in_home "config/sway"                    ".config/sway"
-enable_in_home "ncmpcpp/config"                 ".ncmpcpp/config"
