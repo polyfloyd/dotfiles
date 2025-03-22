@@ -1,5 +1,4 @@
 (include "battery.yuck")
-(include "bluetooth.yuck")
 (include "rain.yuck")
 (include "sound.yuck")
 (include "tibber.yuck")
@@ -31,7 +30,6 @@
       (tibber)
       (rain)
       (sound)
-      (bluetooth)
       (battery)
       (systray)
       (time)
